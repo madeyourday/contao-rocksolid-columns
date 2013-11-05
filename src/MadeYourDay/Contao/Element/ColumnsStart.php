@@ -53,7 +53,7 @@ class ColumnsStart extends \ContentElement
 				? $data['rs_columns_' . $media]
 				: null;
 			if (!$columns) {
-				$columns = $lastColumns ?: '1';
+				$columns = $lastColumns ?: '2';
 			}
 			$lastColumns = $columns;
 
