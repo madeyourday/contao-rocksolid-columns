@@ -23,7 +23,6 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['rs_columns_large'] = array(
 	'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_large'],
 	'eval' => array(
 		'tl_class' => 'rs_columns_w33',
-		'mandatory' => true,
 	),
 	'sql' => "varchar(255) NOT NULL default ''",
 );
@@ -32,7 +31,6 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['rs_columns_medium'] = array(
 	'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_medium'],
 	'eval' => array(
 		'tl_class' => 'rs_columns_w33',
-		'mandatory' => false,
 	),
 	'sql' => "varchar(255) NOT NULL default ''",
 );
@@ -41,7 +39,6 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['rs_columns_small'] = array(
 	'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_small'],
 	'eval' => array(
 		'tl_class' => 'rs_columns_w33',
-		'mandatory' => false,
 	),
 	'sql' => "varchar(255) NOT NULL default ''",
 );
