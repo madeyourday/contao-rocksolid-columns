@@ -14,4 +14,4 @@
 
 $GLOBALS['TL_LANG']['tl_layout']['rs_columns_legend'] = 'RockSolid Columns';
 $GLOBALS['TL_LANG']['tl_layout']['rs_columns_load_css'][0] = 'Spalten-Stylesheet laden';
-$GLOBALS['TL_LANG']['tl_layout']['rs_columns_load_css'][1] = 'Ermöglicht die Verwendung der Spaltenumschlagelemente.';
+$GLOBALS['TL_LANG']['tl_layout']['rs_columns_load_css'][1] = 'Ermöglicht die Verwendung der Spaltenumschlagelemente. Alternativ können Sie Ihr eigenes Stylesheet einbinden.';
