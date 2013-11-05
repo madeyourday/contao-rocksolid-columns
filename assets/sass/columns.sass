@@ -1,0 +1,62 @@
+=column-classes($gutter-width, $max-columns, $class-name)
+	@for $cols from 1 through $max-columns
+		$colWidth: ((1 - ($gutter-width * ($cols - 1))) / $cols)
+		@for $span from 1 through $cols
+			&.-#{unquote($class-name)}-col-#{$cols}-#{$span}
+				width: ((($colWidth * $span) + ($gutter-width * ($span - 1))) * 100%)
+
+.rs-columns
+	clear: both
+	display: inline-block
+	width: 100%
+
+.rs-column
+	$gutter-width: (1 / 13)
+	float: left
+	width: 100%
+	margin-top: ($gutter-width * 100%)
+	margin-right: ($gutter-width * 100%)
+	&.-large-first
+		clear: left
+	&.-large-last
+		margin-right: -5px
+	&.-large-first-row
+		margin-top: 0
+	+column-classes($gutter-width, 6, large)
+
+	// Tablet portrait format (viewport width 900px and below)
+	@media screen and (max-width: 900px)
+		$gutter-width: (1 / 13)
+		margin-top: ($gutter-width * 100%)
+		margin-right: ($gutter-width * 100%)
+		&.-large-first
+			clear: none
+		&.-large-last
+			margin-right: ($gutter-width * 100%)
+		&.-large-first-row
+			margin-top: ($gutter-width * 100%)
+		&.-medium-first
+			clear: left
+		&.-medium-last
+			margin-right: -5px
+		&.-medium-first-row
+			margin-top: 0
+		+column-classes($gutter-width, 6, medium)
+
+	// Mobile (viewport width 599px and below)
+	@media screen and (max-width: 599px)
+		$gutter-width: (1 / 13)
+		margin-right: ($gutter-width * 100%)
+		&.-medium-first
+			clear: none
+		&.-medium-last
+			margin-right: ($gutter-width * 100%)
+		&.-medium-first-row
+			margin-top: ($gutter-width * 100%)
+		&.-small-first
+			clear: left
+		&.-small-last
+			margin-right: -5px
+		&.-small-first-row
+			margin-top: 0
+		+column-classes($gutter-width, 6, small)
