@@ -29,6 +29,7 @@ class ColumnsStart extends \ContentElement
 	{
 		$parentKey = ($this->arrData['ptable'] ?: 'tl_article') . '__' . $this->arrData['pid'];
 		$GLOBALS['TL_RS_COLUMNS'][$parentKey] = array(
+			'active' => true,
 			'count' => 0,
 			'config' => static::getColumnsConfiguration($this->arrData),
 		);

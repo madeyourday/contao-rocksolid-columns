@@ -43,7 +43,12 @@ class Columns
 	{
 		$parentKey = ($row->ptable ?: 'tl_article') . '__' . $row->pid;
 
-		if (isset($GLOBALS['TL_RS_COLUMNS'][$parentKey])) {
+		if (
+			isset($GLOBALS['TL_RS_COLUMNS'][$parentKey])
+			&& $GLOBALS['TL_RS_COLUMNS'][$parentKey]['active']
+			&& $row->type !== 'rs_column_start'
+			&& $row->type !== 'rs_column_stop'
+		) {
 
 			$count = $GLOBALS['TL_RS_COLUMNS'][$parentKey]['count']++;
 			if ($count) {

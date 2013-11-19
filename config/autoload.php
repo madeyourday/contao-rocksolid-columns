@@ -15,10 +15,14 @@
 ClassLoader::addClasses(array(
 	'MadeYourDay\\Contao\\Element\\ColumnsStart' => 'system/modules/rocksolid-columns/src/MadeYourDay/Contao/Element/ColumnsStart.php',
 	'MadeYourDay\\Contao\\Element\\ColumnsStop' => 'system/modules/rocksolid-columns/src/MadeYourDay/Contao/Element/ColumnsStop.php',
+	'MadeYourDay\\Contao\\Element\\ColumnStart' => 'system/modules/rocksolid-columns/src/MadeYourDay/Contao/Element/ColumnStart.php',
+	'MadeYourDay\\Contao\\Element\\ColumnStop' => 'system/modules/rocksolid-columns/src/MadeYourDay/Contao/Element/ColumnStop.php',
 	'MadeYourDay\\Contao\\Columns' => 'system/modules/rocksolid-columns/src/MadeYourDay/Contao/Columns.php',
 ));
 
 TemplateLoader::addFiles(array(
 	'ce_rs_columns_start' => 'system/modules/rocksolid-columns/templates',
 	'ce_rs_columns_stop' => 'system/modules/rocksolid-columns/templates',
+	'ce_rs_column_start' => 'system/modules/rocksolid-columns/templates',
+	'ce_rs_column_stop' => 'system/modules/rocksolid-columns/templates',
 ));
