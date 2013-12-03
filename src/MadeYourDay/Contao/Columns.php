@@ -46,11 +46,15 @@ class Columns
 		if (
 			isset($GLOBALS['TL_RS_COLUMNS'][$parentKey])
 			&& $GLOBALS['TL_RS_COLUMNS'][$parentKey]['active']
+			&& $row->type !== 'rs_columns_start'
+			&& $row->type !== 'rs_columns_stop'
 			&& $row->type !== 'rs_column_start'
 			&& $row->type !== 'rs_column_stop'
 		) {
 
-			$count = $GLOBALS['TL_RS_COLUMNS'][$parentKey]['count']++;
+			$GLOBALS['TL_RS_COLUMNS'][$parentKey]['count']++;
+			$count = $GLOBALS['TL_RS_COLUMNS'][$parentKey]['count'];
+
 			if ($count) {
 
 				$classes = array('rs-column');
