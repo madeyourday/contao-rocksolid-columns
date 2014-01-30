@@ -3,7 +3,7 @@
 	"description":"Arrange your content elements in responsive columns",
 	"keywords":["contao","columns"],
 	"type":"contao-module",
-	"homepage":"http://rocksolidthemes.com/de/contao/plugins/custom-content-elements",
+	"homepage":"http://rocksolidthemes.com/de/contao/plugins/columns",
 	"license":"MIT",
 	"authors":[
 		{
