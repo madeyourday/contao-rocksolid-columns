@@ -73,4 +73,55 @@ class Columns
 
 		return $content;
 	}
+
+	/**
+	 * tl_content DCA onsubmit callback
+	 *
+	 * Creates a stop element after a start element was created
+	 *
+	 * @param  \DataContainer $dc Data container
+	 * @return void
+	 */
+	public function onsubmitCallback($dc)
+	{
+		$activeRecord = $dc->activeRecord;
+		if (!$activeRecord) {
+			return;
+		}
+
+		if ($activeRecord->type === 'rs_columns_start' || $activeRecord->type === 'rs_column_start') {
+
+			// Find the next start or stop element
+			$nextElement = \Database::getInstance()
+				->prepare('
+					SELECT type
+					FROM tl_content
+					WHERE pid = ?
+						AND type IN (?, ?)
+						AND sorting > ?
+					ORDER BY sorting ASC
+					LIMIT 1
+				')
+				->execute(
+					$activeRecord->pid,
+					$activeRecord->type,
+					substr($activeRecord->type, 0, -5) . 'stop',
+					$activeRecord->sorting
+				);
+
+			// Check if a stop element should be created
+			if (!$nextElement->type || substr($nextElement->type, -6) === '_start') {
+				\Database::getInstance()
+					->prepare('INSERT INTO tl_content %s')
+					->set(array(
+						'pid' => $activeRecord->pid,
+						'type' => substr($activeRecord->type, 0, -5) . 'stop',
+						'sorting' => $activeRecord->sorting + 1,
+						'tstamp' => time(),
+					))
+					->execute();
+			}
+
+		}
+	}
 }
