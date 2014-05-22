@@ -26,7 +26,7 @@
 		"classmap":["src/"]
 	},
 	"replace":{
-		"contao-legacy/rocksolid-columns":"*"
+		"contao-legacy/rocksolid-columns":"self.version"
 	},
 	"extra":{
 		"contao":{
