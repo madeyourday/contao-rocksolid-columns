@@ -27,12 +27,25 @@ class ColumnsStop extends \ContentElement
 	 */
 	public function generate()
 	{
+		if (TL_MODE === 'BE') {
+			return parent::generate();
+		}
+
 		$parentKey = ($this->arrData['ptable'] ?: 'tl_article') . '__' . $this->arrData['pid'];
 		if (isset($GLOBALS['TL_RS_COLUMNS'][$parentKey])) {
 			unset($GLOBALS['TL_RS_COLUMNS'][$parentKey]);
 		}
 
-		return parent::generate();
+		$htmlSuffix = '';
+
+		if (!empty($GLOBALS['TL_RS_COLUMNS_STACK'][$parentKey])) {
+			$GLOBALS['TL_RS_COLUMNS'][$parentKey] = array_pop($GLOBALS['TL_RS_COLUMNS_STACK'][$parentKey]);
+			if ($GLOBALS['TL_RS_COLUMNS'][$parentKey]['active']) {
+				$htmlSuffix .= '</div>';
+			}
+		}
+
+		return parent::generate() . $htmlSuffix;
 	}
 
 	/**

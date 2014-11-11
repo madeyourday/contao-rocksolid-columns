@@ -27,14 +27,47 @@ class ColumnsStart extends \ContentElement
 	 */
 	public function generate()
 	{
+		if (TL_MODE === 'BE') {
+			return parent::generate();
+		}
+
 		$parentKey = ($this->arrData['ptable'] ?: 'tl_article') . '__' . $this->arrData['pid'];
+
+		$htmlPrefix = '';
+
+		if (!empty($GLOBALS['TL_RS_COLUMNS'][$parentKey])) {
+
+			if ($GLOBALS['TL_RS_COLUMNS'][$parentKey]['active']) {
+
+				$GLOBALS['TL_RS_COLUMNS'][$parentKey]['count']++;
+				$count = $GLOBALS['TL_RS_COLUMNS'][$parentKey]['count'];
+
+				if ($count) {
+
+					$classes = array('rs-column');
+					foreach ($GLOBALS['TL_RS_COLUMNS'][$parentKey]['config'] as $name => $media) {
+						$classes = array_merge($classes, $media[($count - 1) % count($media)]);
+						if ($count - 1 < count($media)) {
+							$classes[] = '-' . $name . '-first-row';
+						}
+					}
+
+					$htmlPrefix .= '<div class="' . implode(' ', $classes) . '">';
+
+				}
+
+			}
+
+			$GLOBALS['TL_RS_COLUMNS_STACK'][$parentKey][] = $GLOBALS['TL_RS_COLUMNS'][$parentKey];
+		}
+
 		$GLOBALS['TL_RS_COLUMNS'][$parentKey] = array(
 			'active' => true,
 			'count' => 0,
 			'config' => static::getColumnsConfiguration($this->arrData),
 		);
 
-		return parent::generate();
+		return $htmlPrefix . parent::generate();
 	}
 
 	/**

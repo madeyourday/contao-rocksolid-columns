@@ -27,6 +27,10 @@ class ColumnStop extends \ContentElement
 	 */
 	public function generate()
 	{
+		if (TL_MODE === 'BE') {
+			return parent::generate();
+		}
+
 		$parentKey = ($this->arrData['ptable'] ?: 'tl_article') . '__' . $this->arrData['pid'];
 		if (isset($GLOBALS['TL_RS_COLUMNS'][$parentKey])) {
 			$GLOBALS['TL_RS_COLUMNS'][$parentKey]['active'] = true;

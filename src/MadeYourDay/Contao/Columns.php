@@ -91,26 +91,30 @@ class Columns
 
 		if ($activeRecord->type === 'rs_columns_start' || $activeRecord->type === 'rs_column_start') {
 
-			// Find the next start or stop element
+			// Find the next columns or column element
 			$nextElement = \Database::getInstance()
 				->prepare('
 					SELECT type
 					FROM tl_content
 					WHERE pid = ?
-						AND type IN (?, ?)
+						AND type IN (\'rs_column_start\', \'rs_column_stop\', \'rs_columns_start\', \'rs_columns_stop\')
 						AND sorting > ?
 					ORDER BY sorting ASC
 					LIMIT 1
 				')
 				->execute(
 					$activeRecord->pid,
-					$activeRecord->type,
-					substr($activeRecord->type, 0, -5) . 'stop',
 					$activeRecord->sorting
 				);
 
 			// Check if a stop element should be created
-			if (!$nextElement->type || substr($nextElement->type, -6) === '_start') {
+			if (
+				!$nextElement->type
+				|| ($activeRecord->type === 'rs_columns_start' && $nextElement->type === 'rs_column_stop')
+				|| ($activeRecord->type === 'rs_column_start' && (
+					$nextElement->type === 'rs_column_start' || $nextElement->type === 'rs_columns_stop'
+				))
+			) {
 				\Database::getInstance()
 					->prepare('INSERT INTO tl_content %s')
 					->set(array(
