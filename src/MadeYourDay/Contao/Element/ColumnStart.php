@@ -31,19 +31,25 @@ class ColumnStart extends \ContentElement
 			return parent::generate();
 		}
 
+		$classes = array('rs-column');
 		$parentKey = ($this->arrData['ptable'] ?: 'tl_article') . '__' . $this->arrData['pid'];
-		if (isset($GLOBALS['TL_RS_COLUMNS'][$parentKey])) {
+
+		if (isset($GLOBALS['TL_RS_COLUMNS'][$parentKey]) && $GLOBALS['TL_RS_COLUMNS'][$parentKey]['active']) {
+
 			$GLOBALS['TL_RS_COLUMNS'][$parentKey]['active'] = false;
 			$GLOBALS['TL_RS_COLUMNS'][$parentKey]['count']++;
-		}
 
-		$classes = array('rs-column');
-		$count = $GLOBALS['TL_RS_COLUMNS'][$parentKey]['count'];
-		foreach ($GLOBALS['TL_RS_COLUMNS'][$parentKey]['config'] as $name => $media) {
-			$classes = array_merge($classes, $media[($count - 1) % count($media)]);
-			if ($count - 1 < count($media)) {
-				$classes[] = '-' . $name . '-first-row';
+			$count = $GLOBALS['TL_RS_COLUMNS'][$parentKey]['count'];
+			foreach ($GLOBALS['TL_RS_COLUMNS'][$parentKey]['config'] as $name => $media) {
+				$classes = array_merge($classes, $media[($count - 1) % count($media)]);
+				if ($count - 1 < count($media)) {
+					$classes[] = '-' . $name . '-first-row';
+				}
 			}
+
+		}
+		else {
+			trigger_error('Missing column wrapper start element before column start element ID ' . $this->id . '.', E_USER_WARNING);
 		}
 
 		if (!is_array($this->cssID)) {

@@ -33,7 +33,13 @@ class ColumnsStop extends \ContentElement
 
 		$parentKey = ($this->arrData['ptable'] ?: 'tl_article') . '__' . $this->arrData['pid'];
 		if (isset($GLOBALS['TL_RS_COLUMNS'][$parentKey])) {
+			if (!$GLOBALS['TL_RS_COLUMNS'][$parentKey]['active']) {
+				trigger_error('Missing column stop element before column wrapper stop element ID ' . $this->id . '.', E_USER_WARNING);
+			}
 			unset($GLOBALS['TL_RS_COLUMNS'][$parentKey]);
+		}
+		else {
+			trigger_error('Missing column wrapper start element before column wrapper stop element ID ' . $this->id . '.', E_USER_WARNING);
 		}
 
 		$htmlSuffix = '';
