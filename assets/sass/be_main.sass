@@ -1,8 +1,23 @@
-.rs_columns_w33
+.rs_columns_w33,
+.rs_columns_w25
+	position: relative
 	float: left
 	width: 33%
 	height: 72px
-	input
+	.tl_text, .tl_select
 		width: 85%
 	.tl_help
 		margin-right: 24px
+.rs_columns_w25
+	width: 25%
+
+@media (max-width: 767px)
+	.rs_columns_w33,
+	.rs_columns_w25
+		float: none
+		width: 100%
+		height: auto
+		.tl_text, .tl_select
+			width: 100%
+		.tl_help
+			margin-right: 0

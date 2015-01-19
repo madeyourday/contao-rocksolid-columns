@@ -52,6 +52,45 @@ class ColumnStart extends \ContentElement
 			trigger_error('Missing column wrapper start element before column start element ID ' . $this->id . '.', E_USER_WARNING);
 		}
 
+		if ($this->rs_column_color_inverted) {
+			$classes[] = '-color-inverted';
+		}
+
+		if ($this->rs_column_background) {
+
+			$backgroundColor = deserialize($this->rs_column_background_color);
+			if (is_array($backgroundColor) && $backgroundColor[0]) {
+				$this->arrStyle[] = 'background-color: #' . $backgroundColor[0] . ';';
+			}
+
+			if (trim($this->rs_column_background_image)) {
+				$image = \FilesModel::findByPk($this->rs_column_background_image);
+				$file = new \File($image->path, true);
+				$imageObject = new \stdClass();
+				$this->addImageToTemplate($imageObject, array(
+					'id' => $image->id,
+					'uuid' => isset($image->uuid) ? $image->uuid : null,
+					'name' => $file->basename,
+					'singleSRC' => $image->path,
+					'size' => $this->rs_column_background_image_size,
+				));
+				$this->arrStyle[] = 'background-image: url(&quot;' . $imageObject->src . '&quot;);';
+			}
+
+			if ($this->rs_column_background_size) {
+				$this->arrStyle[] = 'background-size: ' . $this->rs_column_background_size . ';';
+			}
+
+			if ($this->rs_column_background_position) {
+				$this->arrStyle[] = 'background-position: ' . $this->rs_column_background_position . ';';
+			}
+
+			if ($this->rs_column_background_repeat) {
+				$this->arrStyle[] = 'background-repeat: ' . $this->rs_column_background_repeat . ';';
+			}
+
+		}
+
 		if (!is_array($this->cssID)) {
 			$this->cssID = array('', '');
 		}

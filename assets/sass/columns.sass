@@ -4,13 +4,40 @@
 			&.-#{unquote($class-name)}-col-#{$cols}-#{$span}
 				width: (1 / $cols * $span * 100%)
 
-$gutter: (1 / 20)
+$gutter-s: (1 / 40)
+$gutter-m: (1 / 20)
+$gutter-l: (1 / 10)
 
 .rs-columns
 	clear: both
 	display: block
-	margin-right: ($gutter * -50%)
-	margin-left: ($gutter * -50%)
+	margin-right: ($gutter-m * -50%)
+	margin-left: ($gutter-m * -50%)
+	&.-gutter-s
+		margin-right: ($gutter-s * -50%)
+		margin-left: ($gutter-s * -50%)
+	&.-gutter-l
+		margin-right: ($gutter-l * -50%)
+		margin-left: ($gutter-l * -50%)
+	&.-gutter-none, &.-outside-gutters
+		margin-right: 0
+		margin-left: 0
+	&.-equal-height
+		/* Don't use -webkit-box or -moz-box here because the 2009 syntax doesn't support flex-wrap
+		display: -webkit-flex
+		display: -ms-flexbox
+		display: flex
+		-webkit-flex-wrap: wrap
+		-ms-flex-wrap: wrap
+		flex-wrap: wrap
+		&:before, &:after
+			/* Hides clearfix pseudo element from flexbox
+			-webkit-flex-basis: 0
+			-ms-flex-preferred-size: 0
+			flex-basis: 0
+			-webkit-order: 1
+			-ms-flex-order: 1
+			order: 1
 	&:before, &:after
 		content: " "
 		display: table
@@ -21,14 +48,33 @@ $gutter: (1 / 20)
 	float: left
 	width: 100%
 	min-height: 1px
-	padding-right: ($gutter / 2 / (1 + $gutter) * 100%)
-	padding-left: ($gutter / 2 / (1 + $gutter) * 100%)
+	padding-right: ($gutter-m / 2 / (1 + $gutter-m) * 100%)
+	padding-left: ($gutter-m / 2 / (1 + $gutter-m) * 100%)
 	-webkit-box-sizing: border-box
 	-moz-box-sizing: border-box
 	box-sizing: border-box
-	&.-large-first
+	&.-color-inverted
+		color: #fff
+	&.-xlarge-first
 		clear: left
-	+column-classes(6, large)
+	.-gutter-s > &
+		padding-right: ($gutter-s / 2 / (1 + $gutter-s) * 100%)
+		padding-left: ($gutter-s / 2 / (1 + $gutter-s) * 100%)
+	.-gutter-l > &
+		padding-right: ($gutter-l / 2 / (1 + $gutter-l) * 100%)
+		padding-left: ($gutter-l / 2 / (1 + $gutter-l) * 100%)
+	.-gutter-none > &
+		padding-right: 0
+		padding-left: 0
+	+column-classes(8, xlarge)
+
+	// Tablet portrait format (viewport width 900px and below)
+	@media screen and (max-width: 1200px)
+		&.-xlarge-first
+			clear: none
+		&.-large-first
+			clear: left
+		+column-classes(8, large)
 
 	// Tablet portrait format (viewport width 900px and below)
 	@media screen and (max-width: 900px)
@@ -36,7 +82,7 @@ $gutter: (1 / 20)
 			clear: none
 		&.-medium-first
 			clear: left
-		+column-classes(6, medium)
+		+column-classes(8, medium)
 
 	// Mobile (viewport width 599px and below)
 	@media screen and (max-width: 599px)
@@ -44,4 +90,4 @@ $gutter: (1 / 20)
 			clear: none
 		&.-small-first
 			clear: left
-		+column-classes(6, small)
+		+column-classes(8, small)
