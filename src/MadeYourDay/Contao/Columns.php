@@ -39,7 +39,7 @@ class Columns
 	 * @param  string $content html content
 	 * @return string          modified $content
 	 */
-	public function getContentElementHook($row, $content, $element)
+	public function getContentElementHook($row, $content)
 	{
 		$parentKey = ($row->ptable ?: 'tl_article') . '__' . $row->pid;
 
