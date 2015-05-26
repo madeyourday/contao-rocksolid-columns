@@ -91,7 +91,7 @@ class ColumnsStart extends \ContentElement
 			$data['rs_columns_xlarge'] = $data['rs_columns_large'];
 		}
 
-		foreach (array('xlarge', 'large', 'medium', 'small') as $media) {
+		foreach (array('xlarge', 'large', 'medium', 'small', 'xsmall') as $media) {
 
 			$columns = isset($data['rs_columns_' . $media])
 				? $data['rs_columns_' . $media]

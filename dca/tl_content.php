@@ -18,7 +18,7 @@ if (TL_MODE === 'BE') {
 
 $GLOBALS['TL_DCA']['tl_content']['config']['onsubmit_callback'][] = array('MadeYourDay\\Contao\\Columns', 'onsubmitCallback');
 
-$GLOBALS['TL_DCA']['tl_content']['palettes']['rs_columns_start'] = '{type_legend},type,headline;{rs_columns_legend},rs_columns_xlarge,rs_columns_large,rs_columns_medium,rs_columns_small,rs_columns_gutter,rs_columns_outside_gutters,rs_columns_equal_height;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['rs_columns_start'] = '{type_legend},type,headline;{rs_columns_legend},rs_columns_xlarge,rs_columns_large,rs_columns_medium,rs_columns_small,rs_columns_xsmall,rs_columns_gutter,rs_columns_outside_gutters,rs_columns_equal_height;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['rs_columns_stop'] = '{type_legend},type;{protected_legend:hide},protected;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['rs_column_start'] = '{type_legend},type,headline;{rs_column_background_legend},rs_column_color_inverted,rs_column_background;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['rs_column_stop'] = '{type_legend},type;{protected_legend:hide},protected;{invisible_legend:hide},invisible,start,stop';
@@ -31,7 +31,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['rs_columns_xlarge'] = array(
 	'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_xlarge'],
 	'exclude' => true,
 	'eval' => array(
-		'tl_class' => 'rs_columns_w25 clr',
+		'tl_class' => 'rs_columns_w20 clr',
 	),
 	'sql' => "varchar(255) NOT NULL default ''",
 );
@@ -40,7 +40,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['rs_columns_large'] = array(
 	'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_large'],
 	'exclude' => true,
 	'eval' => array(
-		'tl_class' => 'rs_columns_w25',
+		'tl_class' => 'rs_columns_w20',
 	),
 	'sql' => "varchar(255) NOT NULL default ''",
 );
@@ -49,7 +49,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['rs_columns_medium'] = array(
 	'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_medium'],
 	'exclude' => true,
 	'eval' => array(
-		'tl_class' => 'rs_columns_w25',
+		'tl_class' => 'rs_columns_w20',
 	),
 	'sql' => "varchar(255) NOT NULL default ''",
 );
@@ -58,7 +58,16 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['rs_columns_small'] = array(
 	'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_small'],
 	'exclude' => true,
 	'eval' => array(
-		'tl_class' => 'rs_columns_w25',
+		'tl_class' => 'rs_columns_w20',
+	),
+	'sql' => "varchar(255) NOT NULL default ''",
+);
+$GLOBALS['TL_DCA']['tl_content']['fields']['rs_columns_xsmall'] = array(
+	'inputType' => 'text',
+	'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_xsmall'],
+	'exclude' => true,
+	'eval' => array(
+		'tl_class' => 'rs_columns_w20',
 	),
 	'sql' => "varchar(255) NOT NULL default ''",
 );

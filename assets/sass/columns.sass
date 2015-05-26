@@ -66,15 +66,15 @@ $gutter-l: (1 / 10)
 	.-gutter-none > &
 		padding-right: 0
 		padding-left: 0
-	+column-classes(8, xlarge)
+	+column-classes(12, xlarge)
 
-	// Tablet portrait format (viewport width 900px and below)
+	// Small desktop format (viewport width 1200px and below)
 	@media screen and (max-width: 1200px)
 		&.-xlarge-first
 			clear: none
 		&.-large-first
 			clear: left
-		+column-classes(8, large)
+		+column-classes(12, large)
 
 	// Tablet portrait format (viewport width 900px and below)
 	@media screen and (max-width: 900px)
@@ -82,7 +82,7 @@ $gutter-l: (1 / 10)
 			clear: none
 		&.-medium-first
 			clear: left
-		+column-classes(8, medium)
+		+column-classes(12, medium)
 
 	// Mobile (viewport width 599px and below)
 	@media screen and (max-width: 599px)
@@ -90,4 +90,12 @@ $gutter-l: (1 / 10)
 			clear: none
 		&.-small-first
 			clear: left
-		+column-classes(8, small)
+		+column-classes(12, small)
+
+	// Mobile portrait (viewport width 399px and below)
+	@media screen and (max-width: 399px)
+		&.-small-first
+			clear: none
+		&.-xsmall-first
+			clear: left
+		+column-classes(12, xsmall)
