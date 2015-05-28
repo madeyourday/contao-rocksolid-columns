@@ -21,3 +21,12 @@ $GLOBALS['TL_LANG']['CTE']['rs_column_start'][0] = 'Column start';
 $GLOBALS['TL_LANG']['CTE']['rs_column_start'][1] = 'The begin of a RockSolid Column.';
 $GLOBALS['TL_LANG']['CTE']['rs_column_stop'][0] = 'Column stop';
 $GLOBALS['TL_LANG']['CTE']['rs_column_stop'][1] = 'The end of a RockSolid Column.';
+
+$GLOBALS['TL_LANG']['FFL']['rs_columns_start'][0] = 'Column Wrapper start';
+$GLOBALS['TL_LANG']['FFL']['rs_columns_start'][1] = 'The begin of a RockSolid Column set.';
+$GLOBALS['TL_LANG']['FFL']['rs_columns_stop'][0] = 'Column Wrapper stop';
+$GLOBALS['TL_LANG']['FFL']['rs_columns_stop'][1] = 'The end of a RockSolid Column set.';
+$GLOBALS['TL_LANG']['FFL']['rs_column_start'][0] = 'Column start';
+$GLOBALS['TL_LANG']['FFL']['rs_column_start'][1] = 'The begin of a RockSolid Column.';
+$GLOBALS['TL_LANG']['FFL']['rs_column_stop'][0] = 'Column stop';
+$GLOBALS['TL_LANG']['FFL']['rs_column_stop'][1] = 'The end of a RockSolid Column.';

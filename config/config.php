@@ -20,6 +20,11 @@ $GLOBALS['TL_CTE']['rs_columns']['rs_columns_stop'] = 'MadeYourDay\\Contao\\Elem
 $GLOBALS['TL_CTE']['rs_columns']['rs_column_start'] = 'MadeYourDay\\Contao\\Element\\ColumnStart';
 $GLOBALS['TL_CTE']['rs_columns']['rs_column_stop'] = 'MadeYourDay\\Contao\\Element\\ColumnStop';
 
+$GLOBALS['TL_FFL']['rs_columns_start'] = 'MadeYourDay\\Contao\\Form\\ColumnsWidget';
+$GLOBALS['TL_FFL']['rs_columns_stop'] = 'MadeYourDay\\Contao\\Form\\ColumnsWidget';
+$GLOBALS['TL_FFL']['rs_column_start'] = 'MadeYourDay\\Contao\\Form\\ColumnsWidget';
+$GLOBALS['TL_FFL']['rs_column_stop'] = 'MadeYourDay\\Contao\\Form\\ColumnsWidget';
+
 $GLOBALS['TL_WRAPPERS']['start'][] = 'rs_columns_start';
 $GLOBALS['TL_WRAPPERS']['stop'][] = 'rs_columns_stop';
 $GLOBALS['TL_WRAPPERS']['start'][] = 'rs_column_start';
