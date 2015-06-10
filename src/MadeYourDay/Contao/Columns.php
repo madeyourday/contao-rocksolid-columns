@@ -97,6 +97,7 @@ class Columns
 					SELECT type
 					FROM tl_content
 					WHERE pid = ?
+						AND (ptable = ? OR ptable = ?)
 						AND type IN (\'rs_column_start\', \'rs_column_stop\', \'rs_columns_start\', \'rs_columns_stop\')
 						AND sorting > ?
 					ORDER BY sorting ASC
@@ -104,6 +105,8 @@ class Columns
 				')
 				->execute(
 					$activeRecord->pid,
+					$activeRecord->ptable ?: 'tl_article',
+					$activeRecord->ptable === 'tl_article' ? '' : $activeRecord->ptable,
 					$activeRecord->sorting
 				);
 
@@ -119,6 +122,7 @@ class Columns
 					->prepare('INSERT INTO tl_content %s')
 					->set(array(
 						'pid' => $activeRecord->pid,
+						'ptable' => $activeRecord->ptable ?: 'tl_article',
 						'type' => substr($activeRecord->type, 0, -5) . 'stop',
 						'sorting' => $activeRecord->sorting + 1,
 						'tstamp' => time(),
