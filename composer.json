@@ -18,9 +18,7 @@
 		"source":"https://github.com/madeyourday/contao-rocksolid-columns"
 	},
 	"require":{
-		"php":">=5.3",
-		"contao/core":">=3,<4",
-		"contao-community-alliance/composer-installer":"*"
+		"php":">=5.3"
 	},
 	"autoload":{
 		"classmap":["src/"]
