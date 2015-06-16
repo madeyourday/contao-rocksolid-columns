@@ -20,9 +20,13 @@ ClassLoader::addClasses(array(
 	'MadeYourDay\\Contao\\Columns' => 'system/modules/rocksolid-columns/src/MadeYourDay/Contao/Columns.php',
 ));
 
+$templatesFolder = version_compare(VERSION, '4.0', '>=')
+	? 'vendor/madeyourday/contao-rocksolid-columns/templates'
+	: 'system/modules/rocksolid-columns/templates';
+
 TemplateLoader::addFiles(array(
-	'ce_rs_columns_start' => 'system/modules/rocksolid-columns/templates',
-	'ce_rs_columns_stop' => 'system/modules/rocksolid-columns/templates',
-	'ce_rs_column_start' => 'system/modules/rocksolid-columns/templates',
-	'ce_rs_column_stop' => 'system/modules/rocksolid-columns/templates',
+	'ce_rs_columns_start' => $templatesFolder,
+	'ce_rs_columns_stop' => $templatesFolder,
+	'ce_rs_column_start' => $templatesFolder,
+	'ce_rs_column_stop' => $templatesFolder,
 ));

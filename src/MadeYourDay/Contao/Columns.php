@@ -28,7 +28,10 @@ class Columns
 	public function generatePageHook(\PageModel $page, \LayoutModel $layout, \PageRegular $pageRegular)
 	{
 		if ($layout->rs_columns_load_css) {
-			$GLOBALS['TL_CSS'][] = 'system/modules/rocksolid-columns/assets/css/columns.css||static';
+			$assetsDir = version_compare(VERSION, '4.0', '>=')
+				? 'web/bundles/rocksolidcolumns'
+				: 'system/modules/rocksolid-columns/assets';
+			$GLOBALS['TL_CSS'][] = $assetsDir . '/css/columns.css||static';
 		}
 	}
 
