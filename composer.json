@@ -22,7 +22,7 @@
 	},
 	"autoload":{
 		"psr-4": {
-			"MadeYourDay\\Contao\\": "src/"
+			"MadeYourDay\\RockSolidColumns\\": "src/"
 		}
 	},
 	"replace":{

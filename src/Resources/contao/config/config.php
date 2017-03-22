@@ -12,13 +12,13 @@
  * @author Martin Auswöger <martin@madeyourday.net>
  */
 
-$GLOBALS['TL_HOOKS']['generatePage'][] = array('MadeYourDay\\Contao\\Columns', 'generatePageHook');
-$GLOBALS['TL_HOOKS']['getContentElement'][] = array('MadeYourDay\\Contao\\Columns', 'getContentElementHook');
+$GLOBALS['TL_HOOKS']['generatePage'][] = array('MadeYourDay\\RockSolidColumns\\Columns', 'generatePageHook');
+$GLOBALS['TL_HOOKS']['getContentElement'][] = array('MadeYourDay\\RockSolidColumns\\Columns', 'getContentElementHook');
 
-$GLOBALS['TL_CTE']['rs_columns']['rs_columns_start'] = 'MadeYourDay\\Contao\\Element\\ColumnsStart';
-$GLOBALS['TL_CTE']['rs_columns']['rs_columns_stop'] = 'MadeYourDay\\Contao\\Element\\ColumnsStop';
-$GLOBALS['TL_CTE']['rs_columns']['rs_column_start'] = 'MadeYourDay\\Contao\\Element\\ColumnStart';
-$GLOBALS['TL_CTE']['rs_columns']['rs_column_stop'] = 'MadeYourDay\\Contao\\Element\\ColumnStop';
+$GLOBALS['TL_CTE']['rs_columns']['rs_columns_start'] = 'MadeYourDay\\RockSolidColumns\\Element\\ColumnsStart';
+$GLOBALS['TL_CTE']['rs_columns']['rs_columns_stop'] = 'MadeYourDay\\RockSolidColumns\\Element\\ColumnsStop';
+$GLOBALS['TL_CTE']['rs_columns']['rs_column_start'] = 'MadeYourDay\\RockSolidColumns\\Element\\ColumnStart';
+$GLOBALS['TL_CTE']['rs_columns']['rs_column_stop'] = 'MadeYourDay\\RockSolidColumns\\Element\\ColumnStop';
 
 $GLOBALS['TL_WRAPPERS']['start'][] = 'rs_columns_start';
 $GLOBALS['TL_WRAPPERS']['stop'][] = 'rs_columns_stop';

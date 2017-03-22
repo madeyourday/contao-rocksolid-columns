@@ -6,7 +6,7 @@
  * file that was distributed with this source code.
  */
 
-namespace MadeYourDay\Contao\Element;
+namespace MadeYourDay\RockSolidColumns\Element;
 
 /**
  * Column stop content element

@@ -13,11 +13,11 @@
  */
 
 ClassLoader::addClasses(array(
-	'MadeYourDay\\Contao\\Element\\ColumnsStart' => 'system/modules/rocksolid-columns/src/MadeYourDay/Contao/Element/ColumnsStart.php',
-	'MadeYourDay\\Contao\\Element\\ColumnsStop' => 'system/modules/rocksolid-columns/src/MadeYourDay/Contao/Element/ColumnsStop.php',
-	'MadeYourDay\\Contao\\Element\\ColumnStart' => 'system/modules/rocksolid-columns/src/MadeYourDay/Contao/Element/ColumnStart.php',
-	'MadeYourDay\\Contao\\Element\\ColumnStop' => 'system/modules/rocksolid-columns/src/MadeYourDay/Contao/Element/ColumnStop.php',
-	'MadeYourDay\\Contao\\Columns' => 'system/modules/rocksolid-columns/src/MadeYourDay/Contao/Columns.php',
+	'MadeYourDay\\RockSolidColumns\\Element\\ColumnsStart' => 'system/modules/rocksolid-columns/src/MadeYourDay/Contao/Element/ColumnsStart.php',
+	'MadeYourDay\\RockSolidColumns\\Element\\ColumnsStop' => 'system/modules/rocksolid-columns/src/MadeYourDay/Contao/Element/ColumnsStop.php',
+	'MadeYourDay\\RockSolidColumns\\Element\\ColumnStart' => 'system/modules/rocksolid-columns/src/MadeYourDay/Contao/Element/ColumnStart.php',
+	'MadeYourDay\\RockSolidColumns\\Element\\ColumnStop' => 'system/modules/rocksolid-columns/src/MadeYourDay/Contao/Element/ColumnStop.php',
+	'MadeYourDay\\RockSolidColumns\\Columns' => 'system/modules/rocksolid-columns/src/MadeYourDay/Contao/Columns.php',
 ));
 
 $templatesFolder = version_compare(VERSION, '4.0', '>=')

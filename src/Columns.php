@@ -6,7 +6,7 @@
  * file that was distributed with this source code.
  */
 
-namespace MadeYourDay\Contao;
+namespace MadeYourDay\RockSolidColumns;
 
 /**
  * RockSolid Columns DCA (tl_content and tl_module)

@@ -19,7 +19,7 @@ if (TL_MODE === 'BE') {
 	$GLOBALS['TL_CSS'][] = $assetsDir . '/css/be_main.css';
 }
 
-$GLOBALS['TL_DCA']['tl_content']['config']['onsubmit_callback'][] = array('MadeYourDay\\Contao\\Columns', 'onsubmitCallback');
+$GLOBALS['TL_DCA']['tl_content']['config']['onsubmit_callback'][] = array('MadeYourDay\\RockSolidColumns\\Columns', 'onsubmitCallback');
 
 $GLOBALS['TL_DCA']['tl_content']['palettes']['rs_columns_start'] = '{type_legend},type,headline;{rs_columns_legend},rs_columns_large,rs_columns_medium,rs_columns_small;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['rs_columns_stop'] = '{type_legend},type;{protected_legend:hide},protected;{expert_legend:hide},guests;{invisible_legend:hide},invisible,start,stop';
