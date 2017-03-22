@@ -13,10 +13,7 @@
  */
 
 if (TL_MODE === 'BE') {
-	$assetsDir = version_compare(VERSION, '4.0', '>=')
-		? 'bundles/rocksolidcolumns'
-		: 'system/modules/rocksolid-columns/assets';
-	$GLOBALS['TL_CSS'][] = $assetsDir . '/css/be_main.css';
+	$GLOBALS['TL_CSS'][] = 'bundles/rocksolidcolumns/css/be_main.css';
 }
 
 $GLOBALS['TL_DCA']['tl_content']['config']['onsubmit_callback'][] = array('MadeYourDay\\RockSolidColumns\\Columns', 'onsubmitCallback');
