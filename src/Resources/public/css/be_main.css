@@ -1,11 +1,8 @@
 .rs_columns_w33 {
   float: left;
-  width: 33%;
+  width: 29%;
   height: 72px;
 }
 .rs_columns_w33 input {
   width: 85%;
-}
-.rs_columns_w33 .tl_help {
-  margin-right: 24px;
 }
