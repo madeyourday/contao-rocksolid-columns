@@ -2,23 +2,27 @@
 	"name":"madeyourday/contao-rocksolid-columns",
 	"description":"Arrange your content elements in responsive columns",
 	"keywords":["contao","columns"],
-	"type":"contao-module",
-	"homepage":"http://rocksolidthemes.com/de/contao/plugins/columns",
+	"type":"contao-bundle",
+	"homepage":"https://rocksolidthemes.com/de/contao/plugins/columns",
 	"license":"MIT",
 	"authors":[
 		{
 			"name":"RockSolid Themes",
-			"homepage":"http://rocksolidthemes.com/de/contao-themes",
+			"homepage":"https://rocksolidthemes.com/de/contao-themes",
 			"role":"Developer"
 		}
 	],
 	"support":{
-		"forum":"http://help.rocksolidthemes.com/discussions",
+		"forum":"http://help.rocksolidthemes.com/discussions/contao",
 		"issues":"https://github.com/madeyourday/contao-rocksolid-columns/issues",
 		"source":"https://github.com/madeyourday/contao-rocksolid-columns"
 	},
 	"require":{
-		"php":">=5.3"
+		"php":">=5.5",
+		"contao/core-bundle":"^4.3"
+	},
+	"conflict": {
+		"contao/core": "*"
 	},
 	"autoload":{
 		"psr-4": {
@@ -31,11 +35,6 @@
 	"extra":{
 		"branch-alias": {
 			"dev-develop": "2.0.x-dev"
-		},
-		"contao":{
-			"sources":{
-				"":"system/modules/rocksolid-columns"
-			}
 		}
 	}
 }
