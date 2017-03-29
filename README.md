@@ -1,8 +1,12 @@
 # RockSolid Columns Contao Extension
 
-Install to */system/modules/rocksolid-columns/*
+## Installation
 
-More information: 
+```sh
+$ composer require madeyourday/contao-rocksolid-columns
+```
 
-* English: http://rocksolidthemes.com/en/contao/plugins/columns
-* German: http://rocksolidthemes.com/de/contao/plugins/columns
+## Documentation:
+
+* English: https://rocksolidthemes.com/en/contao/plugins/columns
+* German: https://rocksolidthemes.com/de/contao/plugins/columns
