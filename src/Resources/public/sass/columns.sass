@@ -46,7 +46,12 @@
 	// Mobile (viewport width 599px and below)
 	@media screen and (max-width: 599px)
 		$gutter-width: (1 / 13)
+		margin-top: ($gutter-width * 100%)
 		margin-right: ($gutter-width * 100%)
+		&.-large-last
+			margin-right: ($gutter-width * 100%)
+		&.-large-first-row
+			margin-top: ($gutter-width * 100%)
 		&.-medium-first
 			clear: none
 		&.-medium-last
