@@ -8,6 +8,11 @@
 
 namespace MadeYourDay\RockSolidColumns;
 
+use Contao\DataContainer;
+use Contao\LayoutModel;
+use Contao\PageModel;
+use Contao\PageRegular;
+
 /**
  * RockSolid Columns DCA (tl_content and tl_module)
  *
@@ -20,12 +25,12 @@ class Columns
 	/**
 	 * generatePage hook
 	 *
-	 * @param  \PageModel   $page
-	 * @param  \LayoutModel $layout
-	 * @param  \PageRegular $pageRegular
+	 * @param  PageModel   $page
+	 * @param  LayoutModel $layout
+	 * @param  PageRegular $pageRegular
 	 * @return void
 	 */
-	public function generatePageHook(\PageModel $page, \LayoutModel $layout, \PageRegular $pageRegular)
+	public function generatePageHook(PageModel $page, LayoutModel $layout, PageRegular $pageRegular)
 	{
 		if ($layout->rs_columns_load_css) {
 			$GLOBALS['TL_CSS'][] = 'web/bundles/rocksolidcolumns/css/columns.css||static';
@@ -79,7 +84,7 @@ class Columns
 	 *
 	 * Creates a stop element after a start element was created
 	 *
-	 * @param  \DataContainer $dc Data container
+	 * @param  DataContainer $dc Data container
 	 * @return void
 	 */
 	public function onsubmitCallback($dc)
