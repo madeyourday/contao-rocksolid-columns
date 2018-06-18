@@ -171,7 +171,14 @@
 }
 @media screen and (max-width: 599px) {
   .rs-column {
+    margin-top: 7.69231%;
     margin-right: 7.69231%;
+  }
+  .rs-column.-large-last {
+    margin-right: 7.69231%;
+  }
+  .rs-column.-large-first-row {
+    margin-top: 7.69231%;
   }
   .rs-column.-medium-first {
     clear: none;
