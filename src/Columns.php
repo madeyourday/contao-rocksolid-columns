@@ -33,7 +33,7 @@ class Columns
 	public function generatePageHook(PageModel $page, LayoutModel $layout, PageRegular $pageRegular)
 	{
 		if ($layout->rs_columns_load_css) {
-			$GLOBALS['TL_CSS'][] = 'web/bundles/rocksolidcolumns/css/columns.css||static';
+			$GLOBALS['TL_CSS'][] = 'bundles/rocksolidcolumns/css/columns.css||static';
 		}
 	}
 
