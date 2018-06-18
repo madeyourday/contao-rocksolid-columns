@@ -123,15 +123,27 @@ class Columns
 					$nextElement->type === 'rs_column_start' || $nextElement->type === 'rs_columns_stop'
 				))
 			) {
+				$set = array();
+
+				// Get all default values for the new entry
+				foreach ($GLOBALS['TL_DCA']['tl_content']['fields'] as $field => $config) {
+					if (array_key_exists('default', $config)) {
+						$set[$field] = \is_array($config['default']) ? serialize($config['default']) : $config['default'];
+						if ($GLOBALS['TL_DCA']['tl_content']['fields'][$field]['eval']['encrypt']) {
+							$set[$field] = \Encryption::encrypt($set[$field]);
+						}
+					}
+				}
+
+				$set['pid'] = $activeRecord->pid;
+				$set['ptable'] = $activeRecord->ptable ?: 'tl_article';
+				$set['type'] = substr($activeRecord->type, 0, -5) . 'stop';
+				$set['sorting'] = $activeRecord->sorting + 1;
+				$set['tstamp'] = time();
+
 				\Database::getInstance()
 					->prepare('INSERT INTO tl_content %s')
-					->set(array(
-						'pid' => $activeRecord->pid,
-						'ptable' => $activeRecord->ptable ?: 'tl_article',
-						'type' => substr($activeRecord->type, 0, -5) . 'stop',
-						'sorting' => $activeRecord->sorting + 1,
-						'tstamp' => time(),
-					))
+					->set($set)
 					->execute();
 			}
 
