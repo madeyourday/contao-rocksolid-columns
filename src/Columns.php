@@ -139,6 +139,9 @@ class Columns
 				$set['ptable'] = $activeRecord->ptable ?: 'tl_article';
 				$set['type'] = substr($activeRecord->type, 0, -5) . 'stop';
 				$set['sorting'] = $activeRecord->sorting + 1;
+				$set['invisible'] = $activeRecord->invisible;
+				$set['start'] = $activeRecord->start;
+				$set['stop'] = $activeRecord->stop;
 				$set['tstamp'] = time();
 
 				\Database::getInstance()
