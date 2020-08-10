@@ -79,7 +79,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['rs_columns_gutter'] = array(
 	'reference' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_gutters'],
 	'eval' => array(
 		'includeBlankOption' => true,
-		'tl_class' => 'clr',
+		'tl_class' => 'clr rs_columns_w33',
 	),
 	'sql' => "varchar(255) NOT NULL default ''",
 );
@@ -88,7 +88,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['rs_columns_outside_gutters'] = array
 	'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_outside_gutters'],
 	'exclude' => true,
 	'eval' => array(
-		'tl_class' => 'w50 m12 clr',
+		'tl_class' => 'rs_columns_w33 m12',
 	),
 	'sql' => "char(1) NOT NULL default ''",
 );
@@ -97,7 +97,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['rs_columns_equal_height'] = array(
 	'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_equal_height'],
 	'exclude' => true,
 	'eval' => array(
-		'tl_class' => 'w50 m12',
+		'tl_class' => 'rs_columns_w33 m12',
 	),
 	'sql' => "char(1) NOT NULL default ''",
 );
