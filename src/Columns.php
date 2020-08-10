@@ -80,7 +80,7 @@ class Columns
 	}
 
 	/**
-	 * tl_content DCA onsubmit callback
+	 * tl_content and tl_form_field DCA onsubmit callback
 	 *
 	 * Creates a stop element after a start element was created
 	 *
@@ -96,24 +96,47 @@ class Columns
 
 		if ($activeRecord->type === 'rs_columns_start' || $activeRecord->type === 'rs_column_start') {
 
-			// Find the next columns or column element
-			$nextElement = \Database::getInstance()
-				->prepare('
-					SELECT type
-					FROM tl_content
-					WHERE pid = ?
-						AND (ptable = ? OR ptable = ?)
-						AND type IN (\'rs_column_start\', \'rs_column_stop\', \'rs_columns_start\', \'rs_columns_stop\')
-						AND sorting > ?
-					ORDER BY sorting ASC
-					LIMIT 1
-				')
-				->execute(
-					$activeRecord->pid,
-					$activeRecord->ptable ?: 'tl_article',
-					$activeRecord->ptable === 'tl_article' ? '' : $activeRecord->ptable,
-					$activeRecord->sorting
-				);
+			if ($dc->table === 'tl_content') {
+
+				// Find the next columns or column element
+				$nextElement = \Database::getInstance()
+					->prepare('
+						SELECT type
+						FROM tl_content
+						WHERE pid = ?
+							AND (ptable = ? OR ptable = ?)
+							AND type IN (\'rs_column_start\', \'rs_column_stop\', \'rs_columns_start\', \'rs_columns_stop\')
+							AND sorting > ?
+						ORDER BY sorting ASC
+						LIMIT 1
+					')
+					->execute(
+						$activeRecord->pid,
+						$activeRecord->ptable ?: 'tl_article',
+						$activeRecord->ptable === 'tl_article' ? '' : $activeRecord->ptable,
+						$activeRecord->sorting
+					);
+
+			}
+			else {
+
+				// Find the next columns or column element
+				$nextElement = \Database::getInstance()
+					->prepare('
+						SELECT type
+						FROM ' . $dc->table . '
+						WHERE pid = ?
+							AND type IN (\'rs_column_start\', \'rs_column_stop\', \'rs_columns_start\', \'rs_columns_stop\')
+							AND sorting > ?
+						ORDER BY sorting ASC
+						LIMIT 1
+					')
+					->execute(
+						$activeRecord->pid,
+						$activeRecord->sorting
+					);
+
+			}
 
 			// Check if a stop element should be created
 			if (
@@ -126,26 +149,29 @@ class Columns
 				$set = array();
 
 				// Get all default values for the new entry
-				foreach ($GLOBALS['TL_DCA']['tl_content']['fields'] as $field => $config) {
+				foreach ($GLOBALS['TL_DCA'][$dc->table]['fields'] as $field => $config) {
 					if (array_key_exists('default', $config)) {
 						$set[$field] = \is_array($config['default']) ? serialize($config['default']) : $config['default'];
-						if ($GLOBALS['TL_DCA']['tl_content']['fields'][$field]['eval']['encrypt']) {
+						if ($GLOBALS['TL_DCA'][$dc->table]['fields'][$field]['eval']['encrypt']) {
 							$set[$field] = \Encryption::encrypt($set[$field]);
 						}
 					}
 				}
 
 				$set['pid'] = $activeRecord->pid;
-				$set['ptable'] = $activeRecord->ptable ?: 'tl_article';
 				$set['type'] = substr($activeRecord->type, 0, -5) . 'stop';
 				$set['sorting'] = $activeRecord->sorting + 1;
 				$set['invisible'] = $activeRecord->invisible;
-				$set['start'] = $activeRecord->start;
-				$set['stop'] = $activeRecord->stop;
 				$set['tstamp'] = time();
 
+				if ($dc->table === 'tl_content') {
+					$set['ptable'] = $activeRecord->ptable ?: 'tl_article';
+					$set['start'] = $activeRecord->start;
+					$set['stop'] = $activeRecord->stop;
+				}
+
 				\Database::getInstance()
-					->prepare('INSERT INTO tl_content %s')
+					->prepare('INSERT INTO ' . $dc->table . ' %s')
 					->set($set)
 					->execute();
 			}

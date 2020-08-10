@@ -1,8 +1,30 @@
-.rs_columns_w33 {
+.rs_columns_w33,
+.rs_columns_w20 {
+  position: relative;
   float: left;
   width: 29%;
   height: 72px;
 }
-.rs_columns_w33 input {
+.rs_columns_w33 .tl_text, .rs_columns_w33 .tl_select,
+.rs_columns_w20 .tl_text,
+.rs_columns_w20 .tl_select {
   width: 85%;
+}
+
+.rs_columns_w20 {
+  width: 20%;
+}
+
+@media (max-width: 767px) {
+  .rs_columns_w33,
+  .rs_columns_w20 {
+    float: none;
+    width: 100%;
+    height: auto;
+  }
+  .rs_columns_w33 .tl_text, .rs_columns_w33 .tl_select,
+  .rs_columns_w20 .tl_text,
+  .rs_columns_w20 .tl_select {
+    width: 100%;
+  }
 }

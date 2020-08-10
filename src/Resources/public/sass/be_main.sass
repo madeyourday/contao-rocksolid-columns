@@ -1,6 +1,19 @@
-.rs_columns_w33
+.rs_columns_w33,
+.rs_columns_w20
+	position: relative
 	float: left
 	width: 29%
 	height: 72px
-	input
+	.tl_text, .tl_select
 		width: 85%
+.rs_columns_w20
+	width: 20%
+
+@media (max-width: 767px)
+	.rs_columns_w33,
+	.rs_columns_w20
+		float: none
+		width: 100%
+		height: auto
+		.tl_text, .tl_select
+			width: 100%

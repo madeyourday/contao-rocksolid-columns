@@ -67,6 +67,11 @@ class ColumnsStart extends \ContentElement
 			'config' => static::getColumnsConfiguration($this->arrData),
 		);
 
+		if (!is_array($this->cssID)) {
+			$this->cssID = array('', '');
+		}
+		$this->arrData['cssID'][1] .= ' ' . static::getWrapperClassName($this->arrData);
+
 		return $htmlPrefix . parent::generate();
 	}
 
@@ -81,7 +86,12 @@ class ColumnsStart extends \ContentElement
 		$config = array();
 		$lastColumns = null;
 
-		foreach (array('large', 'medium', 'small') as $media) {
+		// Backwards compatibility
+		if (empty($data['rs_columns_xlarge']) && !empty($data['rs_columns_large'])) {
+			$data['rs_columns_xlarge'] = $data['rs_columns_large'];
+		}
+
+		foreach (array('xlarge', 'large', 'medium', 'small', 'xsmall') as $media) {
 
 			$columns = isset($data['rs_columns_' . $media])
 				? $data['rs_columns_' . $media]
@@ -113,6 +123,31 @@ class ColumnsStart extends \ContentElement
 		}
 
 		return $config;
+	}
+
+	/**
+	 * Generate the wrapper class name
+	 *
+	 * @param  array $data Data array
+	 * @return string      Wrapper class name
+	 */
+	public static function getWrapperClassName(array $data)
+	{
+		$classes = array('rs-columns');
+
+		if (!empty($data['rs_columns_outside_gutters'])) {
+			$classes[] = '-outside-gutters';
+		}
+
+		if (!empty($data['rs_columns_equal_height'])) {
+			$classes[] = '-equal-height';
+		}
+
+		if (!empty($data['rs_columns_gutter'])) {
+			$classes[] = '-gutter-' . $data['rs_columns_gutter'];
+		}
+
+		return implode(' ', $classes);
 	}
 
 	/**
