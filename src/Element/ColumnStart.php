@@ -55,6 +55,10 @@ class ColumnStart extends \ContentElement
 		if (!is_array($this->cssID)) {
 			$this->cssID = array('', '');
 		}
+		else {
+			$this->cssID = $this->cssID + array('', '');
+		}
+
 		$this->arrData['cssID'][1] .= ' ' . implode(' ', $classes);
 
 		return parent::generate();
