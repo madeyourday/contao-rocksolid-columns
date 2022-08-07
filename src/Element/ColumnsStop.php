@@ -8,12 +8,18 @@
 
 namespace MadeYourDay\RockSolidColumns\Element;
 
+use Contao\BackendTemplate;
+use Contao\ContentElement;
+use Contao\FrontendTemplate;
+use Contao\System;
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * Columns stop content element
  *
  * @author Martin Auswöger <martin@madeyourday.net>
  */
-class ColumnsStop extends \ContentElement
+class ColumnsStop extends ContentElement
 {
 	/**
 	 * @var string Template
@@ -27,7 +33,7 @@ class ColumnsStop extends \ContentElement
 	 */
 	public function generate()
 	{
-		if (TL_MODE === 'BE') {
+		if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {
 			return parent::generate();
 		}
 
@@ -61,13 +67,13 @@ class ColumnsStop extends \ContentElement
 	 */
 	public function compile()
 	{
-		if (TL_MODE == 'BE') {
+		if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {
 			$this->strTemplate = 'be_wildcard';
-			$this->Template = new \BackendTemplate($this->strTemplate);
+			$this->Template = new BackendTemplate($this->strTemplate);
 			$this->Template->title = $this->headline;
 		}
 		else {
-			$this->Template = new \FrontendTemplate($this->strTemplate);
+			$this->Template = new FrontendTemplate($this->strTemplate);
 			$this->Template->setData($this->arrData);
 		}
 	}
