@@ -131,7 +131,7 @@ class Columns
 				foreach ($GLOBALS['TL_DCA']['tl_content']['fields'] as $field => $config) {
 					if (array_key_exists('default', $config)) {
 						$set[$field] = \is_array($config['default']) ? serialize($config['default']) : $config['default'];
-						if ($GLOBALS['TL_DCA']['tl_content']['fields'][$field]['eval']['encrypt']) {
+						if ($GLOBALS['TL_DCA']['tl_content']['fields'][$field]['eval']['encrypt'] ?? false) {
 							$set[$field] = Encryption::encrypt($set[$field]);
 						}
 					}
