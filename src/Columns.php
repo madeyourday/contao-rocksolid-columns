@@ -8,7 +8,9 @@
 
 namespace MadeYourDay\RockSolidColumns;
 
+use Contao\Database;
 use Contao\DataContainer;
+use Contao\Encryption;
 use Contao\LayoutModel;
 use Contao\PageModel;
 use Contao\PageRegular;
@@ -99,7 +101,7 @@ class Columns
 			if ($dc->table === 'tl_content') {
 
 				// Find the next columns or column element
-				$nextElement = \Database::getInstance()
+				$nextElement = Database::getInstance()
 					->prepare('
 						SELECT type
 						FROM tl_content
@@ -121,7 +123,7 @@ class Columns
 			else {
 
 				// Find the next columns or column element
-				$nextElement = \Database::getInstance()
+				$nextElement = Database::getInstance()
 					->prepare('
 						SELECT type
 						FROM ' . $dc->table . '
@@ -152,8 +154,8 @@ class Columns
 				foreach ($GLOBALS['TL_DCA'][$dc->table]['fields'] as $field => $config) {
 					if (array_key_exists('default', $config)) {
 						$set[$field] = \is_array($config['default']) ? serialize($config['default']) : $config['default'];
-						if ($GLOBALS['TL_DCA'][$dc->table]['fields'][$field]['eval']['encrypt']) {
-							$set[$field] = \Encryption::encrypt($set[$field]);
+						if ($GLOBALS['TL_DCA'][$dc->table]['fields'][$field]['eval']['encrypt'] ?? false) {
+							$set[$field] = Encryption::encrypt($set[$field]);
 						}
 					}
 				}
@@ -170,7 +172,7 @@ class Columns
 					$set['stop'] = $activeRecord->stop;
 				}
 
-				\Database::getInstance()
+				Database::getInstance()
 					->prepare('INSERT INTO ' . $dc->table . ' %s')
 					->set($set)
 					->execute();

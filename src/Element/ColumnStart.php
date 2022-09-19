@@ -8,12 +8,18 @@
 
 namespace MadeYourDay\RockSolidColumns\Element;
 
+use Contao\BackendTemplate;
+use Contao\ContentElement;
+use Contao\FrontendTemplate;
+use Contao\System;
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * Column start content element
  *
  * @author Martin Auswöger <martin@madeyourday.net>
  */
-class ColumnStart extends \ContentElement
+class ColumnStart extends ContentElement
 {
 	/**
 	 * @var string Template
@@ -27,7 +33,7 @@ class ColumnStart extends \ContentElement
 	 */
 	public function generate()
 	{
-		if (TL_MODE === 'BE') {
+		if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {
 			return parent::generate();
 		}
 
@@ -94,6 +100,10 @@ class ColumnStart extends \ContentElement
 		if (!is_array($this->cssID)) {
 			$this->cssID = array('', '');
 		}
+		else {
+			$this->cssID = $this->cssID + array('', '');
+		}
+
 		$this->arrData['cssID'][1] .= ' ' . implode(' ', $classes);
 
 		return parent::generate();
@@ -106,13 +116,13 @@ class ColumnStart extends \ContentElement
 	 */
 	public function compile()
 	{
-		if (TL_MODE == 'BE') {
+		if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {
 			$this->strTemplate = 'be_wildcard';
-			$this->Template = new \BackendTemplate($this->strTemplate);
+			$this->Template = new BackendTemplate($this->strTemplate);
 			$this->Template->title = $this->headline;
 		}
 		else {
-			$this->Template = new \FrontendTemplate($this->strTemplate);
+			$this->Template = new FrontendTemplate($this->strTemplate);
 			$this->Template->setData($this->arrData);
 		}
 	}
