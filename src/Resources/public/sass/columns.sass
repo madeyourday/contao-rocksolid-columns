@@ -4,21 +4,21 @@
 			&.-#{unquote($class-name)}-col-#{$cols}-#{$span}
 				width: (1 / $cols * $span * 100%)
 
-$gutter-s: (1 / 40)
-$gutter-m: (1 / 20)
-$gutter-l: (1 / 10)
+$gutter-s: 1rem
+$gutter-m: 2rem
+$gutter-l: 3rem
 
 .rs-columns
 	clear: both
 	display: block
-	margin-right: ($gutter-m * -50%)
-	margin-left: ($gutter-m * -50%)
+	margin-right: ($gutter-m / -2)
+	margin-left: ($gutter-m / -2)
 	&.-gutter-s
-		margin-right: ($gutter-s * -50%)
-		margin-left: ($gutter-s * -50%)
+		margin-right: ($gutter-s / -2)
+		margin-left: ($gutter-s / -2)
 	&.-gutter-l
-		margin-right: ($gutter-l * -50%)
-		margin-left: ($gutter-l * -50%)
+		margin-right: ($gutter-l / -2)
+		margin-left: ($gutter-l / -2)
 	&.-gutter-none, &.-outside-gutters
 		margin-right: 0
 		margin-left: 0
@@ -48,8 +48,8 @@ $gutter-l: (1 / 10)
 	float: left
 	width: 100%
 	min-height: 1px
-	padding-right: ($gutter-m / 2 / (1 + $gutter-m) * 100%)
-	padding-left: ($gutter-m / 2 / (1 + $gutter-m) * 100%)
+	padding-right: ($gutter-m / 2)
+	padding-left: ($gutter-m / 2)
 	-webkit-box-sizing: border-box
 	-moz-box-sizing: border-box
 	box-sizing: border-box
@@ -58,11 +58,11 @@ $gutter-l: (1 / 10)
 	&.-xlarge-first
 		clear: left
 	.-gutter-s > &
-		padding-right: ($gutter-s / 2 / (1 + $gutter-s) * 100%)
-		padding-left: ($gutter-s / 2 / (1 + $gutter-s) * 100%)
+		padding-right: ($gutter-s / 2)
+		padding-left: ($gutter-s / 2)
 	.-gutter-l > &
-		padding-right: ($gutter-l / 2 / (1 + $gutter-l) * 100%)
-		padding-left: ($gutter-l / 2 / (1 + $gutter-l) * 100%)
+		padding-right: ($gutter-l / 2)
+		padding-left: ($gutter-l / 2)
 	.-gutter-none > &
 		padding-right: 0
 		padding-left: 0
