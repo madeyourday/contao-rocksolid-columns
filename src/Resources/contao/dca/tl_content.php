@@ -148,7 +148,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['rs_column_background_image'] = array
 		'multiple' => false,
 		'fieldType' => 'radio',
 		'filesOnly' => true,
-		'extensions' => \Config::get('validImageTypes'),
+		'extensions' => implode(',', System::getContainer()->getParameter('contao.image.valid_extensions')),
 	),
 	'sql' => "binary(16) NULL",
 );
@@ -156,7 +156,9 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['rs_column_background_image_size'] = 
 	'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_column_background_image_size'],
 	'exclude' => true,
 	'inputType' => 'imageSize',
-	'options' => version_compare(VERSION, '3.4', '<') ? $GLOBALS['TL_CROP'] : System::getImageSizes(),
+	'options_callback' => static function () {
+		return System::getContainer()->get('contao.image.sizes')->getAllOptions();
+	},
 	'reference' => &$GLOBALS['TL_LANG']['MSC'],
 	'eval' => array(
 		'rgxp' => 'digit',

@@ -10,7 +10,10 @@ namespace MadeYourDay\RockSolidColumns\Element;
 
 use Contao\BackendTemplate;
 use Contao\ContentElement;
+use Contao\File;
+use Contao\FilesModel;
 use Contao\FrontendTemplate;
+use Contao\StringUtil;
 use Contao\System;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -64,14 +67,14 @@ class ColumnStart extends ContentElement
 
 		if ($this->rs_column_background) {
 
-			$backgroundColor = deserialize($this->rs_column_background_color);
+			$backgroundColor = StringUtil::deserialize($this->rs_column_background_color);
 			if (is_array($backgroundColor) && $backgroundColor[0]) {
 				$this->arrStyle[] = 'background-color: #' . $backgroundColor[0] . ';';
 			}
 
 			if (trim($this->rs_column_background_image)) {
-				$image = \FilesModel::findByPk($this->rs_column_background_image);
-				$file = new \File($image->path, true);
+				$image = FilesModel::findByPk($this->rs_column_background_image);
+				$file = new File($image->path, true);
 				$imageObject = new \stdClass();
 				$this->addImageToTemplate($imageObject, array(
 					'id' => $image->id,
