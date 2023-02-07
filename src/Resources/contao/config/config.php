@@ -12,18 +12,25 @@
  * @author Martin Auswöger <martin@madeyourday.net>
  */
 
-$GLOBALS['TL_HOOKS']['generatePage'][] = array('MadeYourDay\\RockSolidColumns\\Columns', 'generatePageHook');
-$GLOBALS['TL_HOOKS']['getContentElement'][] = array('MadeYourDay\\RockSolidColumns\\Columns', 'getContentElementHook');
+use MadeYourDay\Contao\Form\ColumnsWidget;
+use MadeYourDay\RockSolidColumns\Columns;
+use MadeYourDay\RockSolidColumns\Element\ColumnsStart;
+use MadeYourDay\RockSolidColumns\Element\ColumnsStop;
+use MadeYourDay\RockSolidColumns\Element\ColumnStart;
+use MadeYourDay\RockSolidColumns\Element\ColumnStop;
 
-$GLOBALS['TL_CTE']['rs_columns']['rs_columns_start'] = 'MadeYourDay\\RockSolidColumns\\Element\\ColumnsStart';
-$GLOBALS['TL_CTE']['rs_columns']['rs_columns_stop'] = 'MadeYourDay\\RockSolidColumns\\Element\\ColumnsStop';
-$GLOBALS['TL_CTE']['rs_columns']['rs_column_start'] = 'MadeYourDay\\RockSolidColumns\\Element\\ColumnStart';
-$GLOBALS['TL_CTE']['rs_columns']['rs_column_stop'] = 'MadeYourDay\\RockSolidColumns\\Element\\ColumnStop';
+$GLOBALS['TL_HOOKS']['generatePage'][] = array(Columns::class, 'generatePageHook');
+$GLOBALS['TL_HOOKS']['getContentElement'][] = array(Columns::class, 'getContentElementHook');
 
-$GLOBALS['TL_FFL']['rs_columns_start'] = 'MadeYourDay\\Contao\\Form\\ColumnsWidget';
-$GLOBALS['TL_FFL']['rs_columns_stop'] = 'MadeYourDay\\Contao\\Form\\ColumnsWidget';
-$GLOBALS['TL_FFL']['rs_column_start'] = 'MadeYourDay\\Contao\\Form\\ColumnsWidget';
-$GLOBALS['TL_FFL']['rs_column_stop'] = 'MadeYourDay\\Contao\\Form\\ColumnsWidget';
+$GLOBALS['TL_CTE']['rs_columns']['rs_columns_start'] = ColumnsStart::class;
+$GLOBALS['TL_CTE']['rs_columns']['rs_columns_stop'] = ColumnsStop::class;
+$GLOBALS['TL_CTE']['rs_columns']['rs_column_start'] = ColumnStart::class;
+$GLOBALS['TL_CTE']['rs_columns']['rs_column_stop'] = ColumnStop::class;
+
+$GLOBALS['TL_FFL']['rs_columns_start'] = ColumnsWidget::class;
+$GLOBALS['TL_FFL']['rs_columns_stop'] = ColumnsWidget::class;
+$GLOBALS['TL_FFL']['rs_column_start'] = ColumnsWidget::class;
+$GLOBALS['TL_FFL']['rs_column_stop'] = ColumnsWidget::class;
 
 $GLOBALS['TL_WRAPPERS']['start'][] = 'rs_columns_start';
 $GLOBALS['TL_WRAPPERS']['stop'][] = 'rs_columns_stop';
