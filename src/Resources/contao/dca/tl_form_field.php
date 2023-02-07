@@ -12,18 +12,22 @@
  * @author Martin Auswöger <martin@madeyourday.net>
  */
 
-if (TL_MODE === 'BE') {
-	$GLOBALS['TL_CSS'][] = 'system/modules/rocksolid-columns/assets/css/be_main.css';
+use Contao\System;
+use MadeYourDay\RockSolidColumns\Columns;
+use Symfony\Component\HttpFoundation\Request;
+
+if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {
+	$GLOBALS['TL_CSS'][] = 'bundles/rocksolidcolumns/css/be_main.css';
 	// Load content language file
-	$this->loadLanguageFile('tl_content');
+    System::loadLanguageFile('tl_content');
 }
 
-$GLOBALS['TL_DCA']['tl_form_field']['config']['onsubmit_callback'][] = array('MadeYourDay\\Contao\\Columns', 'onsubmitCallback');
+$GLOBALS['TL_DCA']['tl_form_field']['config']['onsubmit_callback'][] = array(Columns::class, 'onsubmitCallback');
 
-$GLOBALS['TL_DCA']['tl_form_field']['palettes']['rs_columns_start'] = '{type_legend},type;{rs_columns_legend},rs_columns_xlarge,rs_columns_large,rs_columns_medium,rs_columns_small,rs_columns_xsmall,rs_columns_gutter,rs_columns_outside_gutters,rs_columns_equal_height;{expert_legend:hide},class';
-$GLOBALS['TL_DCA']['tl_form_field']['palettes']['rs_columns_stop'] = '{type_legend},type';
-$GLOBALS['TL_DCA']['tl_form_field']['palettes']['rs_column_start'] = '{type_legend},type;{rs_column_background_legend},rs_column_color_inverted,rs_column_background;{expert_legend:hide},class';
-$GLOBALS['TL_DCA']['tl_form_field']['palettes']['rs_column_stop'] = '{type_legend},type';
+$GLOBALS['TL_DCA']['tl_form_field']['palettes']['rs_columns_start'] = '{type_legend},type;{rs_columns_legend},rs_columns_xlarge,rs_columns_large,rs_columns_medium,rs_columns_small,rs_columns_xsmall,rs_columns_gutter,rs_columns_outside_gutters,rs_columns_equal_height;{expert_legend:hide},class;{invisible_legend:hide},invisible';
+$GLOBALS['TL_DCA']['tl_form_field']['palettes']['rs_columns_stop'] = '{type_legend},type;{invisible_legend:hide},invisible';
+$GLOBALS['TL_DCA']['tl_form_field']['palettes']['rs_column_start'] = '{type_legend},type;{rs_column_background_legend},rs_column_color_inverted,rs_column_background;{expert_legend:hide},class;{invisible_legend:hide},invisible';
+$GLOBALS['TL_DCA']['tl_form_field']['palettes']['rs_column_stop'] = '{type_legend},type;{invisible_legend:hide},invisible';
 
 $GLOBALS['TL_DCA']['tl_form_field']['palettes']['__selector__'][] = 'rs_column_background';
 $GLOBALS['TL_DCA']['tl_form_field']['subpalettes']['rs_column_background'] = 'rs_column_background_color,rs_column_background_image,rs_column_background_image_size,rs_column_background_size,rs_column_background_position,rs_column_background_repeat';
@@ -81,7 +85,7 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['rs_columns_gutter'] = array(
 	'reference' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_gutters'],
 	'eval' => array(
 		'includeBlankOption' => true,
-		'tl_class' => 'clr',
+		'tl_class' => 'clr rs_columns_w33',
 	),
 	'sql' => "varchar(255) NOT NULL default ''",
 );
@@ -90,7 +94,7 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['rs_columns_outside_gutters'] = ar
 	'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_outside_gutters'],
 	'exclude' => true,
 	'eval' => array(
-		'tl_class' => 'w50 m12 clr',
+		'tl_class' => 'rs_columns_w33 m12',
 	),
 	'sql' => "char(1) NOT NULL default ''",
 );
@@ -99,7 +103,7 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['rs_columns_equal_height'] = array
 	'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_equal_height'],
 	'exclude' => true,
 	'eval' => array(
-		'tl_class' => 'w50 m12',
+		'tl_class' => 'rs_columns_w33 m12',
 	),
 	'sql' => "char(1) NOT NULL default ''",
 );
@@ -147,7 +151,7 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['rs_column_background_image'] = ar
 		'multiple' => false,
 		'fieldType' => 'radio',
 		'filesOnly' => true,
-		'extensions' => \Config::get('validImageTypes'),
+		'extensions' => implode(',', System::getContainer()->getParameter('contao.image.valid_extensions')),
 	),
 	'sql' => "binary(16) NULL",
 );
@@ -155,7 +159,9 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['rs_column_background_image_size']
 	'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_column_background_image_size'],
 	'exclude' => true,
 	'inputType' => 'imageSize',
-	'options' => version_compare(VERSION, '3.4', '<') ? $GLOBALS['TL_CROP'] : System::getImageSizes(),
+	'options_callback' => static function () {
+		return System::getContainer()->get('contao.image.sizes')->getAllOptions();
+	},
 	'reference' => &$GLOBALS['TL_LANG']['MSC'],
 	'eval' => array(
 		'rgxp' => 'digit',
