@@ -19,14 +19,12 @@ class AddColumnsClassesToContentListener
     public function __invoke(ContentModel $contentModel, string $buffer, $element): string
     {
         $parentKey = ($contentModel->ptable ?: 'tl_article').'__'.$contentModel->pid;
+        $excludeElements = ['rs_columns_start', 'rs_columns_stop', 'rs_column_start', 'rs_column_stop'];
 
         if (
             isset($GLOBALS['TL_RS_COLUMNS'][$parentKey])
             && $GLOBALS['TL_RS_COLUMNS'][$parentKey]['active']
-            && $contentModel->type !== 'rs_columns_start'
-            && $contentModel->type !== 'rs_columns_stop'
-            && $contentModel->type !== 'rs_column_start'
-            && $contentModel->type !== 'rs_column_stop'
+            && !\in_array($contentModel->type, $excludeElements, true)
         ) {
 
             $GLOBALS['TL_RS_COLUMNS'][$parentKey]['count']++;
