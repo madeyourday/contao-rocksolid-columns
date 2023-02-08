@@ -6,38 +6,42 @@
  * file that was distributed with this source code.
  */
 
-namespace MadeYourDay\RockSolidColumns\Element;
+namespace MadeYourDay\RockSolidColumns\Controller\ContentElement;
 
 use Contao\BackendTemplate;
-use Contao\ContentElement;
-use Contao\FrontendTemplate;
-use Contao\System;
+use Contao\ContentModel;
+use Contao\CoreBundle\Controller\ContentElement\AbstractContentElementController;
+use Contao\CoreBundle\Routing\ScopeMatcher;
+use Contao\CoreBundle\ServiceAnnotation\ContentElement;
+use Contao\Template;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Columns start content element
  *
  * @author Martin Auswöger <martin@madeyourday.net>
+ *
+ * @ContentElement("rs_columns_start", category="rs_columns")
  */
-class ColumnsStart extends ContentElement
+class ColumnsStartController extends AbstractContentElementController
 {
-	/**
-	 * @var string Template
-	 */
-	protected $strTemplate = 'ce_rs_columns_start';
+	private ScopeMatcher $scopeMatcher;
 
-	/**
-	 * Parse the template
-	 *
-	 * @return string Parsed element
-	 */
-	public function generate()
+	public function __construct(ScopeMatcher $scopeMatcher)
 	{
-		if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {
-			return parent::generate();
+		$this->scopeMatcher = $scopeMatcher;
+	}
+
+	protected function getResponse(Template $template, ContentModel $model, Request $request): ?Response
+	{
+		if ($this->scopeMatcher->isBackendRequest($request)) {
+			$backendTemplate = new BackendTemplate('be_wildcard');
+			$backendTemplate->title = $template->headline;
+			return new Response($backendTemplate->parse());
 		}
 
-		$parentKey = ($this->arrData['ptable'] ?: 'tl_article') . '__' . $this->arrData['pid'];
+		$parentKey = ($model->ptable ?: 'tl_article') . '__' . $model->pid;
 
 		$htmlPrefix = '';
 
@@ -70,15 +74,12 @@ class ColumnsStart extends ContentElement
 		$GLOBALS['TL_RS_COLUMNS'][$parentKey] = array(
 			'active' => true,
 			'count' => 0,
-			'config' => static::getColumnsConfiguration($this->arrData),
+			'config' => static::getColumnsConfiguration($model->row()),
 		);
 
-		if (!is_array($this->cssID)) {
-			$this->cssID = array('', '');
-		}
-		$this->arrData['cssID'][1] .= ' ' . static::getWrapperClassName($this->arrData);
+		$template->class .= ' ' . static::getWrapperClassName($model->row());
 
-		return $htmlPrefix . parent::generate();
+		return new Response($htmlPrefix . $template->parse());
 	}
 
 	/**
@@ -87,7 +88,7 @@ class ColumnsStart extends ContentElement
 	 * @param  array $data Data array
 	 * @return array       Columns configuration
 	 */
-	public static function getColumnsConfiguration(array $data)
+	public static function getColumnsConfiguration(array $data): array
 	{
 		$config = array();
 		$lastColumns = null;
@@ -99,15 +100,13 @@ class ColumnsStart extends ContentElement
 
 		foreach (array('xlarge', 'large', 'medium', 'small', 'xsmall') as $media) {
 
-			$columns = isset($data['rs_columns_' . $media])
-				? $data['rs_columns_' . $media]
-				: null;
+			$columns = $data['rs_columns_'.$media] ?? null;
 			if (!$columns) {
 				$columns = $lastColumns ?: '2';
 			}
 			$lastColumns = $columns;
 
-			$columns = array_map(function($value) {
+			$columns = array_map(static function($value) {
 				return (int)$value ?: 1;
 			}, explode('-', $columns));
 
@@ -115,11 +114,11 @@ class ColumnsStart extends ContentElement
 				$columns = array_fill(0, (int)$columns[0], '1');
 			}
 
-			$columnsTotal = array_reduce($columns, function($a, $b) {
+			$columnsTotal = array_reduce($columns, static function($a, $b) {
 				return $a + $b;
 			});
 			$classes = array();
-			foreach ($columns as $key => $column) {
+			foreach ($columns as $column) {
 				$classes[] = array('-' . $media . '-col-' . $columnsTotal . '-' . $column);
 			}
 			$classes[0][] = '-' . $media . '-first';
@@ -137,7 +136,7 @@ class ColumnsStart extends ContentElement
 	 * @param  array $data Data array
 	 * @return string      Wrapper class name
 	 */
-	public static function getWrapperClassName(array $data)
+	public static function getWrapperClassName(array $data): string
 	{
 		$classes = array('rs-columns');
 
@@ -154,23 +153,5 @@ class ColumnsStart extends ContentElement
 		}
 
 		return implode(' ', $classes);
-	}
-
-	/**
-	 * Compile the content element
-	 *
-	 * @return void
-	 */
-	public function compile()
-	{
-		if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {
-			$this->strTemplate = 'be_wildcard';
-			$this->Template = new BackendTemplate($this->strTemplate);
-			$this->Template->title = $this->headline;
-		}
-		else {
-			$this->Template = new FrontendTemplate($this->strTemplate);
-			$this->Template->setData($this->arrData);
-		}
 	}
 }
