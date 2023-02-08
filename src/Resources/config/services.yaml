@@ -5,4 +5,4 @@ services:
 
     MadeYourDay\RockSolidColumns\:
         resource: '../../*'
-        exclude: '../../{DependencyInjection,MadeYourDay,Resources}'
+        exclude: '../../{DependencyInjection,Resources}'

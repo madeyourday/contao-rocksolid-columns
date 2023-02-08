@@ -12,7 +12,7 @@
  * @author Martin Auswöger <martin@madeyourday.net>
  */
 
-use MadeYourDay\Contao\Form\ColumnsWidget;
+use MadeYourDay\RockSolidColumns\Widget\Frontend\ColumnsWidget;
 
 $GLOBALS['TL_FFL']['rs_columns_start'] = ColumnsWidget::class;
 $GLOBALS['TL_FFL']['rs_columns_stop'] = ColumnsWidget::class;
