@@ -13,7 +13,6 @@
  */
 
 use Contao\System;
-use MadeYourDay\RockSolidColumns\Columns;
 use Symfony\Component\HttpFoundation\Request;
 
 if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {
@@ -21,8 +20,6 @@ if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendReques
 	// Load content language file
     System::loadLanguageFile('tl_content');
 }
-
-$GLOBALS['TL_DCA']['tl_form_field']['config']['onsubmit_callback'][] = array(Columns::class, 'onsubmitCallback');
 
 $GLOBALS['TL_DCA']['tl_form_field']['palettes']['rs_columns_start'] = '{type_legend},type;{rs_columns_legend},rs_columns_xlarge,rs_columns_large,rs_columns_medium,rs_columns_small,rs_columns_xsmall,rs_columns_gutter,rs_columns_outside_gutters,rs_columns_equal_height;{expert_legend:hide},class;{invisible_legend:hide},invisible';
 $GLOBALS['TL_DCA']['tl_form_field']['palettes']['rs_columns_stop'] = '{type_legend},type;{invisible_legend:hide},invisible';
