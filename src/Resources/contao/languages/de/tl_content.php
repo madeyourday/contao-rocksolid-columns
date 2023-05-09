@@ -29,6 +29,7 @@ $GLOBALS['TL_LANG']['tl_content']['rs_columns_gutters']['none'] = 'Kein Abstand'
 $GLOBALS['TL_LANG']['tl_content']['rs_columns_gutters']['s'] = 'Klein';
 $GLOBALS['TL_LANG']['tl_content']['rs_columns_gutters']['m'] = 'Mittel';
 $GLOBALS['TL_LANG']['tl_content']['rs_columns_gutters']['l'] = 'Groß';
+$GLOBALS['TL_LANG']['tl_content']['rs_columns_gutters']['h'] = 'Riesig';
 $GLOBALS['TL_LANG']['tl_content']['rs_columns_outside_gutters'][0] = 'Außenabstand';
 $GLOBALS['TL_LANG']['tl_content']['rs_columns_outside_gutters'][1] = 'Fügt vor der ersten und nach der letzen Spalte einen Abstand ein.';
 $GLOBALS['TL_LANG']['tl_content']['rs_columns_equal_height'][0] = 'Gleiche Spaltenhöhe';

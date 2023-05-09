@@ -7,6 +7,7 @@
 $gutter-s: 1rem
 $gutter-m: 2rem
 $gutter-l: 3rem
+$gutter-h: 6rem
 
 .rs-columns
 	clear: both
@@ -19,6 +20,9 @@ $gutter-l: 3rem
 	&.-gutter-l
 		margin-right: ($gutter-l / -2)
 		margin-left: ($gutter-l / -2)
+	&.-gutter-h
+		margin-right: ($gutter-h / -2)
+		margin-left: ($gutter-h / -2)
 	&.-gutter-none, &.-outside-gutters
 		margin-right: 0
 		margin-left: 0
@@ -63,6 +67,9 @@ $gutter-l: 3rem
 	.-gutter-l > &
 		padding-right: ($gutter-l / 2)
 		padding-left: ($gutter-l / 2)
+	.-gutter-h > &
+		padding-right: ($gutter-h / 2)
+		padding-left: ($gutter-h / 2)
 	.-gutter-none > &
 		padding-right: 0
 		padding-left: 0
