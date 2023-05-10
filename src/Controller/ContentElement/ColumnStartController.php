@@ -29,13 +29,13 @@ use Symfony\Component\HttpFoundation\Response;
 class ColumnStartController extends AbstractContentElementController
 {
 	private ScopeMatcher $scopeMatcher;
-    private Studio $studio;
+	private Studio $studio;
 
-    public function __construct(ScopeMatcher $scopeMatcher, Studio $studio)
+	public function __construct(ScopeMatcher $scopeMatcher, Studio $studio)
 	{
 		$this->scopeMatcher = $scopeMatcher;
-        $this->studio = $studio;
-    }
+		$this->studio = $studio;
+	}
 
 	protected function getResponse(Template $template, ContentModel $model, Request $request): ?Response
 	{
@@ -79,16 +79,16 @@ class ColumnStartController extends AbstractContentElementController
 			}
 
 			if (trim($model->rs_column_background_image)) {
-                $figure = $this->studio
-                    ->createFigureBuilder()
-                    ->fromUuid($model->rs_column_background_image ?: '')
-                    ->setSize($model->rs_column_background_image_size)
-                    ->enableLightbox(false)
-                    ->buildIfResourceExists()
-                ;
-                if (null !== $figure) {
-                    $styles[] = 'background-image: url(&quot;' . $figure->getImage()->getImageSrc(true) . '&quot;);';
-                }
+				$figure = $this->studio
+					->createFigureBuilder()
+					->fromUuid($model->rs_column_background_image ?: '')
+					->setSize($model->rs_column_background_image_size)
+					->enableLightbox(false)
+					->buildIfResourceExists()
+				;
+				if (null !== $figure) {
+					$styles[] = 'background-image: url(&quot;' . $figure->getImage()->getImageSrc(true) . '&quot;);';
+				}
 			}
 
 			if ($model->rs_column_background_size) {

@@ -18,31 +18,31 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 class AddBackendAssetsListener
 {
-    private RequestStack $requestStack;
-    private ScopeMatcher $scopeMatcher;
+	private RequestStack $requestStack;
+	private ScopeMatcher $scopeMatcher;
 
-    public function __construct(RequestStack $requestStack, ScopeMatcher $scopeMatcher)
-    {
-        $this->requestStack = $requestStack;
-        $this->scopeMatcher = $scopeMatcher;
-    }
+	public function __construct(RequestStack $requestStack, ScopeMatcher $scopeMatcher)
+	{
+		$this->requestStack = $requestStack;
+		$this->scopeMatcher = $scopeMatcher;
+	}
 
-    public function __invoke(string $table): void
-    {
-        if ('tl_content' !== $table && 'tl_form_field' !== $table) {
-            return;
-        }
+	public function __invoke(string $table): void
+	{
+		if ('tl_content' !== $table && 'tl_form_field' !== $table) {
+			return;
+		}
 
-        $request = $this->requestStack->getCurrentRequest();
+		$request = $this->requestStack->getCurrentRequest();
 
-        if (null === $request || !$this->scopeMatcher->isBackendRequest($request)) {
-            return;
-        }
+		if (null === $request || !$this->scopeMatcher->isBackendRequest($request)) {
+			return;
+		}
 
-        $GLOBALS['TL_CSS'][] = 'bundles/rocksolidcolumns/css/be_main.css';
+		$GLOBALS['TL_CSS'][] = 'bundles/rocksolidcolumns/css/be_main.css';
 
-        if ('tl_form_field' === $table) {
-            System::loadLanguageFile('tl_content');
-        }
-    }
+		if ('tl_form_field' === $table) {
+			System::loadLanguageFile('tl_content');
+		}
+	}
 }

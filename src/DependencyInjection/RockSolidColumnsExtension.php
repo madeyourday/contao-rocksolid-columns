@@ -15,10 +15,10 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 final class RockSolidColumnsExtension extends Extension
 {
-    public function load(array $configs, ContainerBuilder $container): void
-    {
-        (new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config')))
-            ->load('services.yaml')
-        ;
-    }
+	public function load(array $configs, ContainerBuilder $container): void
+	{
+		(new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config')))
+			->load('services.yaml')
+		;
+	}
 }

@@ -12,8 +12,8 @@
  * @author Martin Auswöger <martin@madeyourday.net>
  */
 
-use Contao\System;
 use Contao\BackendUser;
+use Contao\System;
 
 $GLOBALS['TL_DCA']['tl_content']['palettes']['rs_columns_start'] = '{type_legend},type,headline;{rs_columns_legend},rs_columns_xlarge,rs_columns_large,rs_columns_medium,rs_columns_small,rs_columns_xsmall,rs_columns_gutter,rs_columns_outside_gutters,rs_columns_equal_height;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['rs_columns_stop'] = '{type_legend},type;{protected_legend:hide},protected;{expert_legend:hide},guests;{invisible_legend:hide},invisible,start,stop';

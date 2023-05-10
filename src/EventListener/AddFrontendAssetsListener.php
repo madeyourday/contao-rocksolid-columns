@@ -18,10 +18,10 @@ use Contao\PageModel;
  */
 class AddFrontendAssetsListener
 {
-    public function __invoke(PageModel $pageModel, LayoutModel $layout, PageRegular $pageRegular): void
-    {
-        if ($layout->rs_columns_load_css) {
-            $GLOBALS['TL_CSS'][] = 'bundles/rocksolidcolumns/css/columns.css||static';
-        }
-    }
+	public function __invoke(PageModel $pageModel, LayoutModel $layout, PageRegular $pageRegular): void
+	{
+		if ($layout->rs_columns_load_css) {
+			$GLOBALS['TL_CSS'][] = 'bundles/rocksolidcolumns/css/columns.css||static';
+		}
+	}
 }

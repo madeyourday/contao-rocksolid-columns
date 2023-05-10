@@ -12,8 +12,8 @@
  * @author Martin Auswöger <martin@madeyourday.net>
  */
 
-use Contao\System;
 use Contao\BackendUser;
+use Contao\System;
 
 $GLOBALS['TL_DCA']['tl_form_field']['palettes']['rs_columns_start'] = '{type_legend},type;{rs_columns_legend},rs_columns_xlarge,rs_columns_large,rs_columns_medium,rs_columns_small,rs_columns_xsmall,rs_columns_gutter,rs_columns_outside_gutters,rs_columns_equal_height;{expert_legend:hide},class;{invisible_legend:hide},invisible';
 $GLOBALS['TL_DCA']['tl_form_field']['palettes']['rs_columns_stop'] = '{type_legend},type;{invisible_legend:hide},invisible';
@@ -151,7 +151,7 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['rs_column_background_image_size']
 	'exclude' => true,
 	'inputType' => 'imageSize',
 	'options_callback' => static function () {
-        return System::getContainer()->get('contao.image.sizes')->getOptionsForUser(BackendUser::getInstance());
+		return System::getContainer()->get('contao.image.sizes')->getOptionsForUser(BackendUser::getInstance());
 	},
 	'reference' => &$GLOBALS['TL_LANG']['MSC'],
 	'eval' => array(

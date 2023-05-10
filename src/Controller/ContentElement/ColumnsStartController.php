@@ -86,7 +86,7 @@ class ColumnsStartController extends AbstractContentElementController
 	 * Generate the columns configuration
 	 *
 	 * @param  array $data Data array
-	 * @return array       Columns configuration
+	 * @return array	   Columns configuration
 	 */
 	public static function getColumnsConfiguration(array $data): array
 	{
@@ -134,7 +134,7 @@ class ColumnsStartController extends AbstractContentElementController
 	 * Generate the wrapper class name
 	 *
 	 * @param  array $data Data array
-	 * @return string      Wrapper class name
+	 * @return string	  Wrapper class name
 	 */
 	public static function getWrapperClassName(array $data): string
 	{
