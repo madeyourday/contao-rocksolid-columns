@@ -29,6 +29,7 @@ $GLOBALS['TL_LANG']['tl_content']['rs_columns_gutters']['none'] = 'None';
 $GLOBALS['TL_LANG']['tl_content']['rs_columns_gutters']['s'] = 'Small';
 $GLOBALS['TL_LANG']['tl_content']['rs_columns_gutters']['m'] = 'Medium';
 $GLOBALS['TL_LANG']['tl_content']['rs_columns_gutters']['l'] = 'Large';
+$GLOBALS['TL_LANG']['tl_content']['rs_columns_gutters']['h'] = 'Huge';
 $GLOBALS['TL_LANG']['tl_content']['rs_columns_outside_gutters'][0] = 'Outside gutter';
 $GLOBALS['TL_LANG']['tl_content']['rs_columns_outside_gutters'][1] = 'Inserts a space before the first and after the last column.';
 $GLOBALS['TL_LANG']['tl_content']['rs_columns_equal_height'][0] = 'Equal column height';
