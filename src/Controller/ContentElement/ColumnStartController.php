@@ -10,12 +10,10 @@ namespace MadeYourDay\RockSolidColumns\Controller\ContentElement;
 
 use Contao\BackendTemplate;
 use Contao\ContentModel;
-use Contao\Controller;
 use Contao\CoreBundle\Controller\ContentElement\AbstractContentElementController;
+use Contao\CoreBundle\Image\Studio\Studio;
 use Contao\CoreBundle\Routing\ScopeMatcher;
 use Contao\CoreBundle\ServiceAnnotation\ContentElement;
-use Contao\File;
-use Contao\FilesModel;
 use Contao\StringUtil;
 use Contao\Template;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,11 +29,13 @@ use Symfony\Component\HttpFoundation\Response;
 class ColumnStartController extends AbstractContentElementController
 {
 	private ScopeMatcher $scopeMatcher;
+    private Studio $studio;
 
-	public function __construct(ScopeMatcher $scopeMatcher)
+    public function __construct(ScopeMatcher $scopeMatcher, Studio $studio)
 	{
 		$this->scopeMatcher = $scopeMatcher;
-	}
+        $this->studio = $studio;
+    }
 
 	protected function getResponse(Template $template, ContentModel $model, Request $request): ?Response
 	{
@@ -79,18 +79,15 @@ class ColumnStartController extends AbstractContentElementController
 			}
 
 			if (trim($model->rs_column_background_image)) {
-				$image = FilesModel::findByPk($model->rs_column_background_image);
-                if (null !== $image) {
-                    $file = new File($image->path);
-                    $imageObject = new \stdClass();
-                    Controller::addImageToTemplate($imageObject, array(
-                        'id' => $image->id,
-                        'uuid' => $image->uuid ?? null,
-                        'name' => $file->basename,
-                        'singleSRC' => $image->path,
-                        'size' => $model->rs_column_background_image_size,
-                    ));
-                    $styles[] = 'background-image: url(&quot;' . $imageObject->src . '&quot;);';
+                $figure = $this->studio
+                    ->createFigureBuilder()
+                    ->fromUuid($model->rs_column_background_image ?: '')
+                    ->setSize($model->rs_column_background_image_size)
+                    ->enableLightbox(false)
+                    ->buildIfResourceExists()
+                ;
+                if (null !== $figure) {
+                    $styles[] = 'background-image: url(&quot;' . $figure->getImage()->getImageSrc(true) . '&quot;);';
                 }
 			}
 
