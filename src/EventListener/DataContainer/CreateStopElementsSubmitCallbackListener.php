@@ -11,7 +11,6 @@ namespace MadeYourDay\RockSolidColumns\EventListener\DataContainer;
 use Contao\CoreBundle\ServiceAnnotation\Callback;
 use Contao\Database;
 use Contao\DataContainer;
-use Contao\Encryption;
 
 /**
  * @Callback(table="tl_content", target="config.onsubmit")
@@ -84,9 +83,6 @@ class CreateStopElementsSubmitCallbackListener
                 foreach ($GLOBALS['TL_DCA'][$dc->table]['fields'] as $field => $config) {
                     if (array_key_exists('default', $config)) {
                         $set[$field] = \is_array($config['default']) ? serialize($config['default']) : $config['default'];
-                        if ($GLOBALS['TL_DCA'][$dc->table]['fields'][$field]['eval']['encrypt'] ?? false) {
-                            $set[$field] = Encryption::encrypt($set[$field]);
-                        }
                     }
                 }
 
