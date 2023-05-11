@@ -6,17 +6,18 @@
  * file that was distributed with this source code.
  */
 
-namespace MadeYourDay\Contao\Form;
+namespace MadeYourDay\RockSolidColumns\Widget\Frontend;
 
-use MadeYourDay\Contao\Model\DummyColumnsModel;
-use MadeYourDay\Contao\Columns;
+use Contao\ContentElement;
+use Contao\Widget;
+use MadeYourDay\RockSolidColumns\Model\DummyColumnsModel;
 
 /**
  * Custom form widget
  *
  * @author Martin Auswöger <martin@madeyourday.net>
  */
-class ColumnsWidget extends \Widget
+class ColumnsWidget extends Widget
 {
 	/**
 	 * @var string Template
@@ -24,7 +25,7 @@ class ColumnsWidget extends \Widget
 	protected $strTemplate = 'form_rs_columns_plain';
 
 	/**
-	 * @var \ContentElement
+	 * @var ContentElement
 	 */
 	private $contentElement;
 
@@ -37,7 +38,9 @@ class ColumnsWidget extends \Widget
 			$data['cssID'] = serialize(array('', $data['class']));
 		}
 
-		$class = \ContentElement::findClass($data['type']);
+		$data['ptable'] = 'tl_form';
+
+		$class = ContentElement::findClass($data['type']);
 
 		$this->contentElement = new $class(new DummyColumnsModel(null, $data));
 

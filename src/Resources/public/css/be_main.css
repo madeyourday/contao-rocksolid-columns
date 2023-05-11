@@ -17,12 +17,12 @@
 @media (max-width: 767px) {
   .rs_columns_w33,
   .rs_columns_w20 {
-    float: none;
-    width: calc(100% - 30px);
-    min-height: 0;
+	float: none;
+	width: calc(100% - 30px);
+	min-height: 0;
   }
   .rs_columns_w33.m12,
   .rs_columns_w20.m12 {
-    min-height: 0;
+	min-height: 0;
   }
 }

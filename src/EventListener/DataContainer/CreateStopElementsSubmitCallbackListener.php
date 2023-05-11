@@ -6,90 +6,19 @@
  * file that was distributed with this source code.
  */
 
-namespace MadeYourDay\RockSolidColumns;
+namespace MadeYourDay\RockSolidColumns\EventListener\DataContainer;
 
+use Contao\CoreBundle\ServiceAnnotation\Callback;
 use Contao\Database;
 use Contao\DataContainer;
-use Contao\Encryption;
-use Contao\LayoutModel;
-use Contao\PageModel;
-use Contao\PageRegular;
 
 /**
- * RockSolid Columns DCA (tl_content and tl_module)
- *
- * Provide miscellaneous methods that are used by the data configuration arrays.
- *
- * @author Martin Auswöger <martin@madeyourday.net>
+ * @Callback(table="tl_content", target="config.onsubmit")
+ * @Callback(table="tl_form_field", target="config.onsubmit")
  */
-class Columns
+class CreateStopElementsSubmitCallbackListener
 {
-	/**
-	 * generatePage hook
-	 *
-	 * @param  PageModel   $page
-	 * @param  LayoutModel $layout
-	 * @param  PageRegular $pageRegular
-	 * @return void
-	 */
-	public function generatePageHook(PageModel $page, LayoutModel $layout, PageRegular $pageRegular)
-	{
-		if ($layout->rs_columns_load_css) {
-			$GLOBALS['TL_CSS'][] = 'bundles/rocksolidcolumns/css/columns.css||static';
-		}
-	}
-
-	/**
-	 * getContentElement hook
-	 *
-	 * @param  Object $row     content element
-	 * @param  string $content html content
-	 * @return string          modified $content
-	 */
-	public function getContentElementHook($row, $content)
-	{
-		$parentKey = ($row->ptable ?: 'tl_article') . '__' . $row->pid;
-
-		if (
-			isset($GLOBALS['TL_RS_COLUMNS'][$parentKey])
-			&& $GLOBALS['TL_RS_COLUMNS'][$parentKey]['active']
-			&& $row->type !== 'rs_columns_start'
-			&& $row->type !== 'rs_columns_stop'
-			&& $row->type !== 'rs_column_start'
-			&& $row->type !== 'rs_column_stop'
-		) {
-
-			$GLOBALS['TL_RS_COLUMNS'][$parentKey]['count']++;
-			$count = $GLOBALS['TL_RS_COLUMNS'][$parentKey]['count'];
-
-			if ($count) {
-
-				$classes = array('rs-column');
-				foreach ($GLOBALS['TL_RS_COLUMNS'][$parentKey]['config'] as $name => $media) {
-					$classes = array_merge($classes, $media[($count - 1) % count($media)]);
-					if ($count - 1 < count($media)) {
-						$classes[] = '-' . $name . '-first-row';
-					}
-				}
-
-				return '<div class="' . implode(' ', $classes) . '">' . $content . '</div>';
-
-			}
-
-		}
-
-		return $content;
-	}
-
-	/**
-	 * tl_content and tl_form_field DCA onsubmit callback
-	 *
-	 * Creates a stop element after a start element was created
-	 *
-	 * @param  DataContainer $dc Data container
-	 * @return void
-	 */
-	public function onsubmitCallback($dc)
+	public function __invoke(DataContainer $dc): void
 	{
 		$activeRecord = $dc->activeRecord;
 		if (!$activeRecord) {
@@ -145,8 +74,8 @@ class Columns
 				!$nextElement->type
 				|| ($activeRecord->type === 'rs_columns_start' && $nextElement->type === 'rs_column_stop')
 				|| ($activeRecord->type === 'rs_column_start' && (
-					$nextElement->type === 'rs_column_start' || $nextElement->type === 'rs_columns_stop'
-				))
+						$nextElement->type === 'rs_column_start' || $nextElement->type === 'rs_columns_stop'
+					))
 			) {
 				$set = array();
 
@@ -154,9 +83,6 @@ class Columns
 				foreach ($GLOBALS['TL_DCA'][$dc->table]['fields'] as $field => $config) {
 					if (array_key_exists('default', $config)) {
 						$set[$field] = \is_array($config['default']) ? serialize($config['default']) : $config['default'];
-						if ($GLOBALS['TL_DCA'][$dc->table]['fields'][$field]['eval']['encrypt'] ?? false) {
-							$set[$field] = Encryption::encrypt($set[$field]);
-						}
 					}
 				}
 
@@ -177,7 +103,6 @@ class Columns
 					->set($set)
 					->execute();
 			}
-
 		}
 	}
 }

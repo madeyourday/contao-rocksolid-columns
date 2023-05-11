@@ -6,19 +6,22 @@
  * file that was distributed with this source code.
  */
 
-namespace MadeYourDay\Contao\Model;
+namespace MadeYourDay\RockSolidColumns\Model;
+
+use Contao\ContentModel;
+use Contao\Database\Result;
 
 /**
  * Dummy columns model
  *
  * @author Martin Auswöger <martin@madeyourday.net>
  */
-class DummyColumnsModel extends \Model
+class DummyColumnsModel extends ContentModel
 {
 	/**
 	 * {@inheritdoc}
 	 */
-	public function __construct(\Database\Result $objResult = null, $data = array())
+	public function __construct(Result $objResult = null, $data = array())
 	{
 		$this->arrModified = array();
 		$this->setRow($data);
