@@ -27,6 +27,7 @@ $GLOBALS['TL_DCA']['tl_content']['palettes']['rs_column_start'] = '{type_legend}
 $GLOBALS['TL_DCA']['tl_content']['palettes']['rs_column_stop'] = '{type_legend},type;{protected_legend:hide},protected;{expert_legend:hide},guests;{invisible_legend:hide},invisible,start,stop';
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['rs_columns_large'] = array(
+    'exclude' => true,
 	'inputType' => 'text',
 	'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_large'],
 	'eval' => array(
@@ -35,6 +36,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['rs_columns_large'] = array(
 	'sql' => "varchar(255) NOT NULL default ''",
 );
 $GLOBALS['TL_DCA']['tl_content']['fields']['rs_columns_medium'] = array(
+	'exclude' => true,
 	'inputType' => 'text',
 	'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_medium'],
 	'eval' => array(
@@ -43,6 +45,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['rs_columns_medium'] = array(
 	'sql' => "varchar(255) NOT NULL default ''",
 );
 $GLOBALS['TL_DCA']['tl_content']['fields']['rs_columns_small'] = array(
+	'exclude' => true,
 	'inputType' => 'text',
 	'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_small'],
 	'eval' => array(
