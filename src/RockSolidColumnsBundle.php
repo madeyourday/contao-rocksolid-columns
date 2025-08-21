@@ -8,6 +8,8 @@
 
 namespace MadeYourDay\RockSolidColumns;
 
+use MadeYourDay\RockSolidColumns\DependencyInjection\RockSolidColumnsExtension;
+use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -17,4 +19,11 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class RockSolidColumnsBundle extends Bundle
 {
+	/**
+	 * {@inheritdoc}
+	 */
+	public function getContainerExtension(): ?ExtensionInterface
+	{
+		return new RockSolidColumnsExtension();
+	}
 }
