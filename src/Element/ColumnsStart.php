@@ -132,6 +132,52 @@ class ColumnsStart extends ContentElement
 	}
 
 	/**
+	 * Generate the columns grid styles
+	 *
+	 * @param  array $data Data array
+	 * @return array       Columns grid styles
+	 */
+	public static function getColumnsGridStyles(array $data)
+	{
+		$styles = array();
+		$lastColumns = null;
+
+		// Backwards compatibility
+		if (empty($data['rs_columns_xlarge']) && !empty($data['rs_columns_large'])) {
+			$data['rs_columns_xlarge'] = $data['rs_columns_large'];
+		}
+
+		foreach (array('xlarge', 'large', 'medium', 'small', 'xsmall') as $media) {
+
+			$columns = isset($data['rs_columns_' . $media])
+				? $data['rs_columns_' . $media]
+				: null;
+			if (!$columns) {
+				$columns = $lastColumns ?: '2';
+			}
+			$lastColumns = $columns;
+
+			$columns = array_map(function($value) {
+				return (int)$value ?: 1;
+			}, explode('-', $columns));
+
+			if (count($columns) === 1 && $columns[0] > 1) {
+				$columns = array_fill(0, (int)$columns[0], '1');
+			}
+
+			$columnsTotal = array_reduce($columns, function($a, $b) {
+				return $a + $b;
+			});
+
+			$styles["--rs-columns-$media-count"] = (string) \count($columns);
+			$styles["--rs-columns-$media-total"] = (string) $columnsTotal;
+			$styles["--rs-columns-$media-grid"] = implode(' ', array_map(static fn ($col) => "minmax(0, {$col}fr)", $columns));
+		}
+
+		return $styles;
+	}
+
+	/**
 	 * Generate the wrapper class name
 	 *
 	 * @param  array $data Data array

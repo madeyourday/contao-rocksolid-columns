@@ -51,6 +51,17 @@ final class TwigExtension extends AbstractExtension
 				},
 				['needs_context' => true],
 			),
+			new TwigFunction(
+				'rsc_grid_styles',
+				function ($context, array|object|null $data = null): array {
+					if ($data instanceof \Traversable) {
+						$data = iterator_to_array($data);
+					}
+
+					return ColumnsStart::getColumnsGridStyles(array_merge((array) $context, (array) $data));
+				},
+				['needs_context' => true],
+			),
 		];
 	}
 }
