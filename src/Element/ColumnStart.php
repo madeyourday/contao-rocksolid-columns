@@ -67,9 +67,8 @@ class ColumnStart extends ContentElement
 
 		if ($this->rs_column_background) {
 
-			$backgroundColor = StringUtil::deserialize($this->rs_column_background_color);
-			if (is_array($backgroundColor) && $backgroundColor[0]) {
-				$this->arrStyle[] = 'background-color: #' . $backgroundColor[0] . ';';
+			if ($this->rs_column_background_color) {
+				$this->arrStyle[] = 'background-color: #' . $this->rs_column_background_color . ';';
 			}
 
 			if (trim($this->rs_column_background_image)) {
