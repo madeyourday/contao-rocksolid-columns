@@ -70,6 +70,7 @@ class ColumnsStart extends ContentElement
 		$GLOBALS['TL_RS_COLUMNS'][$parentKey] = array(
 			'active' => true,
 			'count' => 0,
+			'wrapperLevel' => 0,
 			'config' => static::getColumnsConfiguration($this->arrData),
 		);
 

@@ -52,29 +52,48 @@ class Columns
 
 		if (
 			isset($GLOBALS['TL_RS_COLUMNS'][$parentKey])
-			&& $GLOBALS['TL_RS_COLUMNS'][$parentKey]['active']
 			&& $row->type !== 'rs_columns_start'
 			&& $row->type !== 'rs_columns_stop'
 			&& $row->type !== 'rs_column_start'
 			&& $row->type !== 'rs_column_stop'
 		) {
 
-			$GLOBALS['TL_RS_COLUMNS'][$parentKey]['count']++;
-			$count = $GLOBALS['TL_RS_COLUMNS'][$parentKey]['count'];
+			if ($GLOBALS['TL_RS_COLUMNS'][$parentKey]['active']) {
+				$GLOBALS['TL_RS_COLUMNS'][$parentKey]['count']++;
+				$count = $GLOBALS['TL_RS_COLUMNS'][$parentKey]['count'];
 
-			if ($count) {
+				if ($count) {
 
-				$classes = array('rs-column');
-				foreach ($GLOBALS['TL_RS_COLUMNS'][$parentKey]['config'] as $name => $media) {
-					$classes = array_merge($classes, $media[($count - 1) % count($media)]);
-					if ($count - 1 < count($media)) {
-						$classes[] = '-' . $name . '-first-row';
+					$classes = array('rs-column');
+					foreach ($GLOBALS['TL_RS_COLUMNS'][$parentKey]['config'] as $name => $media) {
+						$classes = array_merge($classes, $media[($count - 1) % count($media)]);
+						if ($count - 1 < count($media)) {
+							$classes[] = '-' . $name . '-first-row';
+						}
+					}
+
+					if (\in_array($row->type, $GLOBALS['TL_WRAPPERS']['start'], true)) {
+						$GLOBALS['TL_RS_COLUMNS'][$parentKey]['active'] = false;
+						$GLOBALS['TL_RS_COLUMNS'][$parentKey]['wrapperLevel'] = 1;
+
+						$content = '<div class="' . implode(' ', $classes) . '">' . $content;
+					} else {
+						$content = '<div class="' . implode(' ', $classes) . '">' . $content . '</div>';
+					}
+
+					return $content;
+				}
+			} elseif ($GLOBALS['TL_RS_COLUMNS'][$parentKey]['wrapperLevel'] > 0) {
+				if (\in_array($row->type, $GLOBALS['TL_WRAPPERS']['start'], true)) {
+					$GLOBALS['TL_RS_COLUMNS'][$parentKey]['wrapperLevel']++;
+				} elseif (\in_array($row->type, $GLOBALS['TL_WRAPPERS']['stop'], true)) {
+					if ((--$GLOBALS['TL_RS_COLUMNS'][$parentKey]['wrapperLevel']) === 0) {
+						$GLOBALS['TL_RS_COLUMNS'][$parentKey]['active'] = true;
+						$content = "$content</div>";
 					}
 				}
-
-				return '<div class="' . implode(' ', $classes) . '">' . $content . '</div>';
-
 			}
+
 
 		}
 
