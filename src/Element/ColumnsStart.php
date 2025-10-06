@@ -192,8 +192,8 @@ class ColumnsStart extends ContentElement
 			$classes[] = '-outside-gutters';
 		}
 
-		if (!empty($data['rs_columns_equal_height'])) {
-			$classes[] = '-equal-height';
+		if (!empty($data['rs_columns_align'])) {
+			$classes[] = '-align-' . $data['rs_columns_align'];
 		}
 
 		if (!empty($data['rs_columns_gutter'])) {

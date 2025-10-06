@@ -20,7 +20,7 @@
   margin-right: 0;
   margin-left: 0;
 }
-.rs-columns.-equal-height {
+.rs-columns.-align-top, .rs-columns.-align-center, .rs-columns.-align-bottom, .rs-columns.-align-stretch, .rs-columns.-align-baseline {
   /* Don't use -webkit-box or -moz-box here because the 2009 syntax doesn't support flex-wrap */
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -29,7 +29,7 @@
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-.rs-columns.-equal-height:before, .rs-columns.-equal-height:after {
+.rs-columns.-align-top:before, .rs-columns.-align-top:after, .rs-columns.-align-center:before, .rs-columns.-align-center:after, .rs-columns.-align-bottom:before, .rs-columns.-align-bottom:after, .rs-columns.-align-stretch:before, .rs-columns.-align-stretch:after, .rs-columns.-align-baseline:before, .rs-columns.-align-baseline:after {
   /* Hides clearfix pseudo element from flexbox */
   -webkit-flex-basis: 0;
   -ms-flex-preferred-size: 0;
@@ -37,6 +37,49 @@
   -webkit-order: 1;
   -ms-flex-order: 1;
   order: 1;
+}
+.rs-columns.-align-top > h1,
+.rs-columns.-align-top > h2,
+.rs-columns.-align-top > h3,
+.rs-columns.-align-top > h4,
+.rs-columns.-align-top > h5,
+.rs-columns.-align-top > h6, .rs-columns.-align-center > h1,
+.rs-columns.-align-center > h2,
+.rs-columns.-align-center > h3,
+.rs-columns.-align-center > h4,
+.rs-columns.-align-center > h5,
+.rs-columns.-align-center > h6, .rs-columns.-align-bottom > h1,
+.rs-columns.-align-bottom > h2,
+.rs-columns.-align-bottom > h3,
+.rs-columns.-align-bottom > h4,
+.rs-columns.-align-bottom > h5,
+.rs-columns.-align-bottom > h6, .rs-columns.-align-stretch > h1,
+.rs-columns.-align-stretch > h2,
+.rs-columns.-align-stretch > h3,
+.rs-columns.-align-stretch > h4,
+.rs-columns.-align-stretch > h5,
+.rs-columns.-align-stretch > h6, .rs-columns.-align-baseline > h1,
+.rs-columns.-align-baseline > h2,
+.rs-columns.-align-baseline > h3,
+.rs-columns.-align-baseline > h4,
+.rs-columns.-align-baseline > h5,
+.rs-columns.-align-baseline > h6 {
+  width: 100%;
+}
+.rs-columns.-align-top {
+  align-items: start;
+}
+.rs-columns.-align-center {
+  align-items: center;
+}
+.rs-columns.-align-bottom {
+  align-items: end;
+}
+.rs-columns.-align-stretch {
+  align-items: stretch;
+}
+.rs-columns.-align-baseline {
+  align-items: baseline;
 }
 .rs-columns:before, .rs-columns:after {
   content: " ";

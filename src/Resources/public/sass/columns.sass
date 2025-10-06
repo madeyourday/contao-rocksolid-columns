@@ -26,7 +26,11 @@ $gutter-h: 6rem
 	&.-gutter-none, &.-outside-gutters
 		margin-right: 0
 		margin-left: 0
-	&.-equal-height
+	&.-align-top,
+	&.-align-center,
+	&.-align-bottom,
+	&.-align-stretch,
+	&.-align-baseline
 		/* Don't use -webkit-box or -moz-box here because the 2009 syntax doesn't support flex-wrap
 		display: -webkit-flex
 		display: -ms-flexbox
@@ -42,6 +46,23 @@ $gutter-h: 6rem
 			-webkit-order: 1
 			-ms-flex-order: 1
 			order: 1
+		> h1,
+		> h2,
+		> h3,
+		> h4,
+		> h5,
+		> h6
+			width: 100%
+	&.-align-top
+		align-items: start
+	&.-align-center
+		align-items: center
+	&.-align-bottom
+		align-items: end
+	&.-align-stretch
+		align-items: stretch
+	&.-align-baseline
+		align-items: baseline
 	&:before, &:after
 		content: " "
 		display: table

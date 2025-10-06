@@ -32,8 +32,13 @@ $GLOBALS['TL_LANG']['tl_content']['rs_columns_gutters']['l'] = 'Groß';
 $GLOBALS['TL_LANG']['tl_content']['rs_columns_gutters']['h'] = 'Riesig';
 $GLOBALS['TL_LANG']['tl_content']['rs_columns_outside_gutters'][0] = 'Außenabstand';
 $GLOBALS['TL_LANG']['tl_content']['rs_columns_outside_gutters'][1] = 'Fügt vor der ersten und nach der letzen Spalte einen Abstand ein.';
-$GLOBALS['TL_LANG']['tl_content']['rs_columns_equal_height'][0] = 'Gleiche Spaltenhöhe';
-$GLOBALS['TL_LANG']['tl_content']['rs_columns_equal_height'][1] = 'Erzeugt für alle Spalten einer Reihe dieselbe Höhe.';
+$GLOBALS['TL_LANG']['tl_content']['rs_columns_align'][0] = 'Spaltenausrichtung';
+$GLOBALS['TL_LANG']['tl_content']['rs_columns_align'][1] = 'Vertikale Ausrichtung der Spalten.';
+$GLOBALS['TL_LANG']['tl_content']['rs_columns_aligns']['top'] = 'Oben';
+$GLOBALS['TL_LANG']['tl_content']['rs_columns_aligns']['center'] = 'Mitte';
+$GLOBALS['TL_LANG']['tl_content']['rs_columns_aligns']['bottom'] = 'Unten';
+$GLOBALS['TL_LANG']['tl_content']['rs_columns_aligns']['stretch'] = 'Höhe angleichen';
+$GLOBALS['TL_LANG']['tl_content']['rs_columns_aligns']['baseline'] = 'An Grundlinie ausrichten';
 
 $GLOBALS['TL_LANG']['tl_content']['rs_column_background_legend'] = 'Hintergrund der Spalte';
 $GLOBALS['TL_LANG']['tl_content']['rs_column_color_inverted'][0] = 'Textfarbe invertieren';

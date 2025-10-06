@@ -21,7 +21,7 @@ if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendReques
 
 $GLOBALS['TL_DCA']['tl_content']['config']['onsubmit_callback'][] = array('MadeYourDay\\RockSolidColumns\\Columns', 'onsubmitCallback');
 
-$GLOBALS['TL_DCA']['tl_content']['palettes']['rs_columns_start'] = '{type_legend},type,headline;{rs_columns_legend},rs_columns_xlarge,rs_columns_large,rs_columns_medium,rs_columns_small,rs_columns_xsmall,rs_columns_gutter,rs_columns_outside_gutters,rs_columns_equal_height;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID;{invisible_legend:hide},invisible,start,stop';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['rs_columns_start'] = '{type_legend},type,headline;{rs_columns_legend},rs_columns_xlarge,rs_columns_large,rs_columns_medium,rs_columns_small,rs_columns_xsmall,rs_columns_gutter,rs_columns_outside_gutters,rs_columns_align;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['rs_columns_stop'] = '{type_legend},type;{protected_legend:hide},protected;{expert_legend:hide},guests;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['rs_column_start'] = '{type_legend},type,headline;{rs_column_background_legend},rs_column_color_inverted,rs_column_background;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['rs_column_stop'] = '{type_legend},type;{protected_legend:hide},protected;{expert_legend:hide},guests;{invisible_legend:hide},invisible,start,stop';
@@ -95,16 +95,18 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['rs_columns_outside_gutters'] = array
 	),
 	'sql' => "char(1) NOT NULL default ''",
 );
-$GLOBALS['TL_DCA']['tl_content']['fields']['rs_columns_equal_height'] = array(
-	'inputType' => 'checkbox',
-	'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_equal_height'],
+$GLOBALS['TL_DCA']['tl_content']['fields']['rs_columns_align'] = array(
+	'inputType' => 'select',
+	'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_align'],
 	'exclude' => true,
+	'options' => array('top', 'center', 'bottom', 'stretch', 'baseline'),
+	'reference' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_aligns'],
 	'eval' => array(
-		'tl_class' => 'rs_columns_w33 m12',
+		'includeBlankOption' => true,
+		'tl_class' => 'rs_columns_w33',
 	),
-	'sql' => "char(1) NOT NULL default ''",
+	'sql' => "varchar(255) NOT NULL default ''",
 );
-
 $GLOBALS['TL_DCA']['tl_content']['fields']['rs_column_color_inverted'] = array(
 	'inputType' => 'checkbox',
 	'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_column_color_inverted'],

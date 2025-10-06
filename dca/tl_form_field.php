@@ -20,7 +20,7 @@ if (TL_MODE === 'BE') {
 
 $GLOBALS['TL_DCA']['tl_form_field']['config']['onsubmit_callback'][] = array('MadeYourDay\\Contao\\Columns', 'onsubmitCallback');
 
-$GLOBALS['TL_DCA']['tl_form_field']['palettes']['rs_columns_start'] = '{type_legend},type;{rs_columns_legend},rs_columns_xlarge,rs_columns_large,rs_columns_medium,rs_columns_small,rs_columns_xsmall,rs_columns_gutter,rs_columns_outside_gutters,rs_columns_equal_height;{expert_legend:hide},class';
+$GLOBALS['TL_DCA']['tl_form_field']['palettes']['rs_columns_start'] = '{type_legend},type;{rs_columns_legend},rs_columns_xlarge,rs_columns_large,rs_columns_medium,rs_columns_small,rs_columns_xsmall,rs_columns_gutter,rs_columns_outside_gutters,rs_columns_align;{expert_legend:hide},class';
 $GLOBALS['TL_DCA']['tl_form_field']['palettes']['rs_columns_stop'] = '{type_legend},type';
 $GLOBALS['TL_DCA']['tl_form_field']['palettes']['rs_column_start'] = '{type_legend},type;{rs_column_background_legend},rs_column_color_inverted,rs_column_background;{expert_legend:hide},class';
 $GLOBALS['TL_DCA']['tl_form_field']['palettes']['rs_column_stop'] = '{type_legend},type';
@@ -94,16 +94,18 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['rs_columns_outside_gutters'] = ar
 	),
 	'sql' => "char(1) NOT NULL default ''",
 );
-$GLOBALS['TL_DCA']['tl_form_field']['fields']['rs_columns_equal_height'] = array(
-	'inputType' => 'checkbox',
-	'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_equal_height'],
+$GLOBALS['TL_DCA']['tl_form_field']['fields']['rs_columns_align'] = array(
+	'inputType' => 'select',
+	'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_align'],
 	'exclude' => true,
+	'options' => array('top', 'center', 'bottom', 'stretch', 'baseline'),
+	'reference' => &$GLOBALS['TL_LANG']['tl_content']['rs_columns_aligns'],
 	'eval' => array(
-		'tl_class' => 'w50 m12',
+		'includeBlankOption' => true,
+		'tl_class' => 'w50',
 	),
-	'sql' => "char(1) NOT NULL default ''",
+	'sql' => "varchar(255) NOT NULL default ''",
 );
-
 $GLOBALS['TL_DCA']['tl_form_field']['fields']['rs_column_color_inverted'] = array(
 	'inputType' => 'checkbox',
 	'label' => &$GLOBALS['TL_LANG']['tl_content']['rs_column_color_inverted'],
