@@ -20,7 +20,7 @@
   margin-right: 0;
   margin-left: 0;
 }
-.rs-columns.-align-top, .rs-columns.-align-center, .rs-columns.-align-bottom, .rs-columns.-align-stretch, .rs-columns.-align-baseline {
+.rs-columns.-align-top, .rs-columns.-align-center, .rs-columns.-align-bottom, .rs-columns.-align-stretch, .rs-columns.-align-baseline, .rs-columns.-align-sticky {
   /* Don't use -webkit-box or -moz-box here because the 2009 syntax doesn't support flex-wrap */
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -29,7 +29,7 @@
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-.rs-columns.-align-top:before, .rs-columns.-align-top:after, .rs-columns.-align-center:before, .rs-columns.-align-center:after, .rs-columns.-align-bottom:before, .rs-columns.-align-bottom:after, .rs-columns.-align-stretch:before, .rs-columns.-align-stretch:after, .rs-columns.-align-baseline:before, .rs-columns.-align-baseline:after {
+.rs-columns.-align-top:before, .rs-columns.-align-top:after, .rs-columns.-align-center:before, .rs-columns.-align-center:after, .rs-columns.-align-bottom:before, .rs-columns.-align-bottom:after, .rs-columns.-align-stretch:before, .rs-columns.-align-stretch:after, .rs-columns.-align-baseline:before, .rs-columns.-align-baseline:after, .rs-columns.-align-sticky:before, .rs-columns.-align-sticky:after {
   /* Hides clearfix pseudo element from flexbox */
   -webkit-flex-basis: 0;
   -ms-flex-preferred-size: 0;
@@ -63,7 +63,12 @@
 .rs-columns.-align-baseline > h3,
 .rs-columns.-align-baseline > h4,
 .rs-columns.-align-baseline > h5,
-.rs-columns.-align-baseline > h6 {
+.rs-columns.-align-baseline > h6, .rs-columns.-align-sticky > h1,
+.rs-columns.-align-sticky > h2,
+.rs-columns.-align-sticky > h3,
+.rs-columns.-align-sticky > h4,
+.rs-columns.-align-sticky > h5,
+.rs-columns.-align-sticky > h6 {
   width: 100%;
 }
 .rs-columns.-align-top {
@@ -80,6 +85,13 @@
 }
 .rs-columns.-align-baseline {
   align-items: baseline;
+}
+.rs-columns.-align-sticky {
+  align-items: start;
+}
+.rs-columns.-align-sticky > * {
+  position: sticky;
+  top: 0;
 }
 .rs-columns:before, .rs-columns:after {
   content: " ";

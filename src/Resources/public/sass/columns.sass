@@ -30,7 +30,8 @@ $gutter-h: 6rem
 	&.-align-center,
 	&.-align-bottom,
 	&.-align-stretch,
-	&.-align-baseline
+	&.-align-baseline,
+	&.-align-sticky
 		/* Don't use -webkit-box or -moz-box here because the 2009 syntax doesn't support flex-wrap
 		display: -webkit-flex
 		display: -ms-flexbox
@@ -63,6 +64,11 @@ $gutter-h: 6rem
 		align-items: stretch
 	&.-align-baseline
 		align-items: baseline
+	&.-align-sticky
+		align-items: stretch
+		> .rs-column > *
+			position: sticky
+			top: 0
 	&:before, &:after
 		content: " "
 		display: table

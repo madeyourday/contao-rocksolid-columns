@@ -39,6 +39,7 @@ $GLOBALS['TL_LANG']['tl_content']['rs_columns_aligns']['center'] = 'Mitte';
 $GLOBALS['TL_LANG']['tl_content']['rs_columns_aligns']['bottom'] = 'Unten';
 $GLOBALS['TL_LANG']['tl_content']['rs_columns_aligns']['stretch'] = 'Höhe angleichen';
 $GLOBALS['TL_LANG']['tl_content']['rs_columns_aligns']['baseline'] = 'An Grundlinie ausrichten';
+$GLOBALS['TL_LANG']['tl_content']['rs_columns_aligns']['sticky'] = 'Sticky';
 
 $GLOBALS['TL_LANG']['tl_content']['rs_column_background_legend'] = 'Hintergrund der Spalte';
 $GLOBALS['TL_LANG']['tl_content']['rs_column_color_inverted'][0] = 'Textfarbe invertieren';
