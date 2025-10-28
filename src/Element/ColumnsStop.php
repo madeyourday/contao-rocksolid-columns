@@ -53,7 +53,7 @@ class ColumnsStop extends ContentElement
 		if (!empty($GLOBALS['TL_RS_COLUMNS_STACK'][$parentKey])) {
 			$GLOBALS['TL_RS_COLUMNS'][$parentKey] = array_pop($GLOBALS['TL_RS_COLUMNS_STACK'][$parentKey]);
 			if ($GLOBALS['TL_RS_COLUMNS'][$parentKey]['active']) {
-				$htmlSuffix .= '</div>';
+				$htmlSuffix .= '</div></div>';
 			}
 		}
 

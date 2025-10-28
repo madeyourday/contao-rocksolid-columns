@@ -9,6 +9,9 @@ $gutter-m: 2rem
 $gutter-l: 3rem
 $gutter-h: 6rem
 
+\:where(.rs-column-inner)
+	display: contents
+
 .rs-columns
 	clear: both
 	display: block
@@ -66,7 +69,8 @@ $gutter-h: 6rem
 		align-items: baseline
 	&.-align-sticky
 		align-items: stretch
-		> .rs-column > *
+		> .rs-column > .rs-column-inner
+			display: block
 			position: sticky
 			top: 0
 	&:before, &:after

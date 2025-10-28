@@ -58,7 +58,7 @@ class ColumnsStart extends ContentElement
 						}
 					}
 
-					$htmlPrefix .= '<div class="' . implode(' ', $classes) . '">';
+					$htmlPrefix .= '<div class="' . implode(' ', $classes) . '"><div class="rs-column-inner">';
 
 				}
 

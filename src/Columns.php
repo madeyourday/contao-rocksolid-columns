@@ -76,9 +76,9 @@ class Columns
 						$GLOBALS['TL_RS_COLUMNS'][$parentKey]['active'] = false;
 						$GLOBALS['TL_RS_COLUMNS'][$parentKey]['wrapperLevel'] = 1;
 
-						$content = '<div class="' . implode(' ', $classes) . '">' . $content;
+						$content = '<div class="' . implode(' ', $classes) . '"><div class="rs-column-inner">' . $content;
 					} else {
-						$content = '<div class="' . implode(' ', $classes) . '">' . $content . '</div>';
+						$content = '<div class="' . implode(' ', $classes) . '"><div class="rs-column-inner">' . $content . '</div></div>';
 					}
 
 					return $content;
@@ -89,7 +89,7 @@ class Columns
 				} elseif (\in_array($row->type, $GLOBALS['TL_WRAPPERS']['stop'], true)) {
 					if ((--$GLOBALS['TL_RS_COLUMNS'][$parentKey]['wrapperLevel']) === 0) {
 						$GLOBALS['TL_RS_COLUMNS'][$parentKey]['active'] = true;
-						$content = "$content</div>";
+						$content = "$content</div></div>";
 					}
 				}
 			}

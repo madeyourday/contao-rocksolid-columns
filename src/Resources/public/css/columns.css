@@ -1,3 +1,7 @@
+:where(.rs-column-inner) {
+  display: contents;
+}
+
 .rs-columns {
   clear: both;
   display: block;
@@ -87,9 +91,10 @@
   align-items: baseline;
 }
 .rs-columns.-align-sticky {
-  align-items: start;
+  align-items: stretch;
 }
-.rs-columns.-align-sticky > * {
+.rs-columns.-align-sticky > .rs-column > .rs-column-inner {
+  display: block;
   position: sticky;
   top: 0;
 }
