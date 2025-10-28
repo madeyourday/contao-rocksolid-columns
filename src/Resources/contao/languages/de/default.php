@@ -13,9 +13,9 @@
  */
 
 $GLOBALS['TL_LANG']['CTE']['rs_columns'] = 'Spaltenumschlag';
-$GLOBALS['TL_LANG']['CTE']['rs_columns_start'][0] = 'Umschlag Anfang';
+$GLOBALS['TL_LANG']['CTE']['rs_columns_start'][0] = 'Spaltenumschlag Anfang';
 $GLOBALS['TL_LANG']['CTE']['rs_columns_start'][1] = 'Der Beginn eines RockSolid Columns Spaltensets.';
-$GLOBALS['TL_LANG']['CTE']['rs_columns_stop'][0] = 'Umschlag Ende';
+$GLOBALS['TL_LANG']['CTE']['rs_columns_stop'][0] = 'Spaltenumschlag Ende';
 $GLOBALS['TL_LANG']['CTE']['rs_columns_stop'][1] = 'Das Ende eines RockSolid Columns Spaltensets.';
 $GLOBALS['TL_LANG']['CTE']['rs_column_start'][0] = 'Spalte Anfang';
 $GLOBALS['TL_LANG']['CTE']['rs_column_start'][1] = 'Der Beginn einer RockSolid Columns Spalte.';
