@@ -1,4 +1,4 @@
-<div class="<?php echo $this->class ?>"<?php echo $this->cssID ?><?php if ($this->style): ?> style="<?php echo $this->style ?>"<?php endif ?>>
+<div class="<?php echo $this->class ?>"<?php echo $this->cssID ?><?php if ($this->rs_columns_sticky_offset): ?> style="--rs-columns-sticky-offset: <?php echo $this->rs_columns_sticky_offset ?>"<?php endif ?>>
 
 	<?php if ($this->headline): ?>
 		<<?php echo $this->hl ?>><?php echo $this->headline ?></<?php echo $this->hl ?>>

@@ -13,6 +13,7 @@ $gutter-h: 6rem
 	display: contents
 
 .rs-columns
+	--rs-columns-sticky-offset: initial
 	clear: both
 	display: block
 	margin-right: ($gutter-m / -2)
@@ -70,9 +71,9 @@ $gutter-h: 6rem
 	&.-align-sticky
 		align-items: stretch
 		> .rs-column > .rs-column-inner
-			display: block
+			display: flow-root
 			position: sticky
-			top: 0
+			top: var(--rs-columns-sticky-offset, 0)
 	&:before, &:after
 		content: " "
 		display: table
