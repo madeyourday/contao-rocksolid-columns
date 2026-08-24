@@ -1,0 +1,7 @@
+<div{{ attrs(cssID|default)
+    .addClass(class|default)
+    .addStyle(style|default)
+}}>
+    {% if headline|default %}
+        <{{ hl|default('h1') }}>{{ headline }}</{{ hl|default('h1') }}>
+    {% endif %}
